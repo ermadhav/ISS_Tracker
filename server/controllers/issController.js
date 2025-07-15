@@ -107,3 +107,4 @@ export async function checkAndSendAlerts() {
     console.error('Error in checkAndSendAlerts:', error);
   }
 }
+

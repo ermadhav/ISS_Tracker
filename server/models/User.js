@@ -1,5 +1,5 @@
 // server/models/User.js
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
   email: {
@@ -26,9 +26,8 @@ const UserSchema = new mongoose.Schema({
   },
   lastAlertSent: {
     type: Date,
-    default: null
+    default: null // Timestamp of the last alert sent to prevent spamming
   }
 }, { timestamps: true });
 
-const User = mongoose.model('User', UserSchema);
-export default User;
+module.exports = mongoose.model('User', UserSchema);

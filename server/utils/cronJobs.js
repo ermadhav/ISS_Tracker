@@ -1,13 +1,12 @@
-import cron from "node-cron";
-import { checkAndSendAlerts } from '../controllers/issController.js';
+// server/utils/cronJobs.js
+const cron = require('node-cron');
+const { checkAndSendAlerts } = require('../controllers/issController');
 
-export function startAlertScheduler() {
-  cron.schedule("* * * * *", async () => {
-    console.log("Running scheduled ISS alert task...");
-    try {
-      await checkAndSendAlerts();
-    } catch (error) {
-      console.error("Error in scheduled ISS alert task:", error);
-    }
+exports.startAlertScheduler = () => {
+  // Schedule the alert check to run every 10 minutes
+  // You can adjust the cron schedule as needed
+  cron.schedule('*/10 * * * *', () => {
+    console.log('Running scheduled ISS alert check...');
+    checkAndSendAlerts();
   });
-}
+};

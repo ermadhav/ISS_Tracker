@@ -26,6 +26,7 @@ const App = () => {
     email: '',
   });
   const [alertMessage, setAlertMessage] = useState('');
+  const [locationDetectMessage, setLocationDetectMessage] = useState('');
 
   // Function to fetch ISS data from the backend
   const fetchIssData = async () => {
@@ -66,7 +67,7 @@ const App = () => {
     }
   };
 
-  // Function to handle alert setup
+  // Function to handle alert setup (remains the same, interacts with backend)
   const handleAlertSetup = async (e) => {
     e.preventDefault();
     setAlertMessage(''); // Clear previous messages
@@ -99,6 +100,47 @@ const App = () => {
       setAlertMessage("Failed to set up alert. Please try again.");
     }
   };
+
+  // Function to detect user's current location using Geolocation API
+  const detectUserLocation = () => {
+    setLocationDetectMessage('Detecting your location...');
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserLocation(prev => ({
+            ...prev,
+            latitude: latitude.toFixed(4), // Round to 4 decimal places
+            longitude: longitude.toFixed(4), // Round to 4 decimal places
+          }));
+          setLocationDetectMessage('Location detected successfully!');
+        },
+        (geoError) => {
+          console.error("Error getting location:", geoError);
+          let message = 'Failed to detect location.';
+          switch (geoError.code) {
+            case geoError.PERMISSION_DENIED:
+              message = 'Location access denied. Please allow location access in your browser settings.';
+              break;
+            case geoError.POSITION_UNAVAILABLE:
+              message = 'Location information is unavailable.';
+              break;
+            case geoError.TIMEOUT:
+              message = 'The request to get user location timed out.';
+              break;
+            default:
+              message = 'An unknown error occurred while detecting location.';
+              break;
+          }
+          setLocationDetectMessage(message);
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      );
+    } else {
+      setLocationDetectMessage('Geolocation is not supported by your browser.');
+    }
+  };
+
 
   // Effect to start/stop tracking
   useEffect(() => {
@@ -204,6 +246,20 @@ const App = () => {
           Enter your location and email to receive alerts when the ISS is visible from your area.
         </p>
         <form onSubmit={handleAlertSetup} className="space-y-4">
+          {/* Detect Location Button */}
+          <button
+            type="button"
+            onClick={detectUserLocation}
+            className="w-full py-2 rounded-md font-bold text-md bg-purple-600 hover:bg-purple-700 text-white shadow-lg transition-all duration-300 mb-4"
+          >
+            Detect My Location
+          </button>
+          {locationDetectMessage && (
+            <p className="text-center text-sm font-medium text-blue-300 mb-4">
+              {locationDetectMessage}
+            </p>
+          )}
+
           <div>
             <label htmlFor="lat" className="block text-gray-300 text-sm font-bold mb-2">
               Your Latitude:

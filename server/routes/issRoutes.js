@@ -1,10 +1,10 @@
 // server/routes/issRoutes.js
-import express from 'express';
-import { getCurrentIssPosition, setUserLocation } from '../controllers/issController.js';
+const express = require('express');
+const { getCurrentIssPosition, setUserLocation } = require('../controllers/issController');
 
 const router = express.Router();
 
 router.get('/iss/current', getCurrentIssPosition);
 router.post('/users/location', setUserLocation);
 
-export default router; // ✅ ES module export
+module.exports = router;

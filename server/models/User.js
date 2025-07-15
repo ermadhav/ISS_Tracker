@@ -1,0 +1,33 @@
+// server/models/User.js
+const mongoose = require('mongoose');
+
+const UserSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    match: [/.+@.+\..+/, 'Please enter a valid email address']
+  },
+  latitude: {
+    type: Number,
+    required: true,
+    min: -90,
+    max: 90
+  },
+  longitude: {
+    type: Number,
+    required: true,
+    min: -180,
+    max: 180
+  },
+  alertEnabled: {
+    type: Boolean,
+    default: true
+  },
+  lastAlertSent: {
+    type: Date,
+    default: null // Timestamp of the last alert sent to prevent spamming
+  }
+}, { timestamps: true });
+
+module.exports = mongoose.model('User', UserSchema);

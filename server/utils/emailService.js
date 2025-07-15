@@ -1,6 +1,6 @@
 // server/utils/emailService.js
-const nodemailer = require('nodemailer');
-const dotenv = require('dotenv');
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-exports.sendEmail = async (to, subject, text) => {
+export async function sendEmail(to, subject, text) {
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to,
@@ -27,4 +27,4 @@ exports.sendEmail = async (to, subject, text) => {
     console.error('Error sending email:', error);
     throw new Error('Failed to send email.');
   }
-};
+}

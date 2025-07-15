@@ -1,5 +1,5 @@
 // server/utils/cronJobs.js
-const cron = require("node-cron");
+// const cron = require("node-cron");
 // const { checkAndSendAlerts } = require('../controllers/issController');
 
 // exports.startAlertScheduler = () => {

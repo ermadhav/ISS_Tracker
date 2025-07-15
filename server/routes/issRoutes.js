@@ -1,9 +1,13 @@
+// server/routes/issRoutes.js
 import express from 'express';
 import { getCurrentIssPosition, setUserLocation } from '../controllers/issController.js';
 
 const router = express.Router();
 
-router.get('/iss/current', getCurrentIssPosition);
-router.post('/users/location', setUserLocation);
+// Define route to get current ISS position
+router.get('/iss-position', getCurrentIssPosition);
+
+// Define route to set user location
+router.post('/set-location', setUserLocation);
 
 export default router;

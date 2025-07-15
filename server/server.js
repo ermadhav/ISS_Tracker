@@ -23,7 +23,7 @@ mongoose.connect(process.env.MONGO_URI, {
 .catch(err => console.error('MongoDB connection error:', err));
 
 // API Routes
-app.use('/api', issRoutes); // All ISS-related routes will be prefixed with /api
+app.use('/api', issRoutes); // so /api/iss-position will work
 
 // Start the alert scheduler
 startAlertScheduler();

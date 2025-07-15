@@ -3,9 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Optional: Font Inter */
+/* Optional: Import the Inter font if you're using it */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', sans-serif; /* Apply the font */
 }

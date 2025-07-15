@@ -1,10 +1,9 @@
-// server/server.js
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const issRoutes = require('./routes/issRoutes');
-const { startAlertScheduler } = require('./utils/cronJobs');
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import issRoutes from './routes/issRoutes.js';
+import { startAlertScheduler } from './utils/cronJobs.js';
 
 dotenv.config(); // Load environment variables from .env file
 

@@ -14,6 +14,9 @@ const PORT = process.env.PORT || 5000;
 app.use(cors()); // Enable CORS for all origins (adjust for production)
 app.use(express.json()); // Parse JSON request bodies
 
+console.log("MONGO_URI:", process.env.MONGO_URI);
+
+
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,

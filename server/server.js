@@ -1,22 +1,19 @@
-// server/server.js
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 import issRoutes from './routes/issRoutes.js';
-import { startAlertScheduler } from './utils/cronJobs.js'; // ✅ Fixed import
+import { startAlertScheduler } from './utils/cronJobs.js';
 
-dotenv.config(); // Load environment variables from .env file
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors()); // Enable CORS for all origins (adjust for production)
-app.use(express.json()); // Parse JSON request bodies
+app.use(cors());
+app.use(express.json());
 
-// MongoDB Connection
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -24,18 +21,14 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log('MongoDB connected successfully'))
 .catch(err => console.error('MongoDB connection error:', err));
 
-// API Routes
-app.use('/api', issRoutes); // All ISS-related routes will be prefixed with /api
+app.use('/api', issRoutes);
 
-// Start the alert scheduler
 startAlertScheduler();
 
-// Basic route for testing
 app.get('/', (req, res) => {
   res.send('ISS Tracker Backend is running!');
 });
 
-// Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

@@ -1,9 +1,7 @@
-// server/controllers/issController.js
-import fetch from 'node-fetch'; // ✅ Only this, no require
-import User from '../models/User.js'; // ✅ Must include .js extension
-import { sendEmail } from '../utils/emailService.js'; // ✅ Include extension
+import fetch from 'node-fetch';
+import User from '../models/User.js';
+import { sendEmail } from '../utils/emailService.js';
 
-// Fetch current ISS position
 export async function getCurrentIssPosition(req, res) {
   try {
     const response = await fetch('http://api.open-notify.org/iss-now.json');
@@ -13,8 +11,8 @@ export async function getCurrentIssPosition(req, res) {
       res.json({
         latitude: parseFloat(data.iss_position.latitude),
         longitude: parseFloat(data.iss_position.longitude),
-        velocity: 27571.37, // Example placeholder
-        altitude: 420.01,   // Example placeholder
+        velocity: 27571.37,
+        altitude: 420.01,
         country: 'Not available',
         state: 'Not available'
       });
@@ -27,7 +25,6 @@ export async function getCurrentIssPosition(req, res) {
   }
 }
 
-// Register or update user location for alerts
 export async function setUserLocation(req, res) {
   const { email, latitude, longitude } = req.body;
 
@@ -58,7 +55,6 @@ export async function setUserLocation(req, res) {
   }
 }
 
-// Function to check for ISS passes and send alerts
 export async function checkAndSendAlerts() {
   console.log('Running ISS alert check...');
   try {
@@ -107,4 +103,3 @@ export async function checkAndSendAlerts() {
     console.error('Error in checkAndSendAlerts:', error);
   }
 }
-

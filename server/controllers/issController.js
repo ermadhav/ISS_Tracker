@@ -1,8 +1,6 @@
-// import fetch from 'node-fetch';
+import fetch from 'node-fetch';
 import User from '../models/User.js';
 import { sendEmail } from '../utils/emailService.js';
-
-import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -53,7 +51,6 @@ export const getCurrentIssPosition = async (req, res) => {
   }
 };
 
-
 // Register or update user location for alerts
 export const setUserLocation = async (req, res) => {
   const { email, latitude, longitude } = req.body;
@@ -85,7 +82,7 @@ export const setUserLocation = async (req, res) => {
   }
 };
 
-// Function to check for ISS passes and send alerts
+// Function to check for ISS passes and send alerts using wheretheiss.at API
 export const checkAndSendAlerts = async () => {
   console.log('Running ISS alert check...');
   try {
@@ -101,11 +98,18 @@ export const checkAndSendAlerts = async () => {
       }
 
       try {
-        const passResponse = await fetch(`http://api.open-notify.org/iss-pass.json?lat=${latitude}&lon=${longitude}&n=1`);
+        const passResponse = await fetch(`https://api.wheretheiss.at/v1/satellites/25544/passes?lat=${latitude}&lon=${longitude}&n=1`);
+        
+        if (!passResponse.ok) {
+          const text = await passResponse.text();
+          console.error(`API error for ${email}:`, text);
+          continue;
+        }
+
         const passData = await passResponse.json();
 
-        if (passData.message === 'success' && passData.response && passData.response.length > 0) {
-          const nextPass = passData.response[0];
+        if (Array.isArray(passData) && passData.length > 0) {
+          const nextPass = passData[0];
           const passTime = new Date(nextPass.risetime * 1000);
           const duration = nextPass.duration;
 
@@ -124,7 +128,7 @@ export const checkAndSendAlerts = async () => {
             console.log(`No imminent ISS pass for ${email} within the next 2 hours.`);
           }
         } else {
-          console.log(`No ISS pass data or API error for ${email}.`);
+          console.log(`No ISS pass data for ${email}.`);
         }
       } catch (passError) {
         console.error(`Error checking ISS pass for ${email}:`, passError);

@@ -22,6 +22,16 @@ export default function GlobeView() {
     return () => clearInterval(ticker);
   }, []);
 
+  const lastSegment = path.length >= 2
+    ? [{
+        startLat: path[path.length - 2].lat,
+        startLng: path[path.length - 2].lng,
+        endLat: path[path.length - 1].lat,
+        endLng: path[path.length - 1].lng,
+        color: ['#ffcc00'],  // VALID COLOR FORMAT
+      }]
+    : [];
+
   return (
     <Globe
       ref={globeRef}
@@ -30,17 +40,11 @@ export default function GlobeView() {
       pointsData={[pos]}
       pointLat="lat"
       pointLng="lng"
-      pointColor={() => '#ff6600'}
+      pointColor={() => '#ff6600'}       // ✅ Always return string
       pointAltitude={0.02}
       pointLabel={() => '🛰 ISS'}
-      arcsData={path.length > 1 ? [{
-        startLat: path[path.length - 2].lat,
-        startLng: path[path.length - 2].lng,
-        endLat: path[path.length - 1].lat,
-        endLng: path[path.length - 1].lng,
-        color: ['#ffcc00'],
-      }] : []}
-      arcColor="color"
+      arcsData={lastSegment}
+      arcColor={() => '#ffcc00'}         // ✅ Always return string
       arcAltitude={0.05}
       arcStroke={2}
       arcDashLength={0.4}

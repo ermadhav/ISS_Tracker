@@ -2,29 +2,57 @@ import fetch from 'node-fetch';
 import User from '../models/User.js';
 import { sendEmail } from '../utils/emailService.js';
 
-// Fetch current ISS position
+import fetch from 'node-fetch';
+import dotenv from 'dotenv';
+dotenv.config();
+
 export const getCurrentIssPosition = async (req, res) => {
   try {
     const response = await fetch('http://api.open-notify.org/iss-now.json');
     const data = await response.json();
 
-    if (data.message === 'success') {
-      res.json({
-        latitude: parseFloat(data.iss_position.latitude),
-        longitude: parseFloat(data.iss_position.longitude),
-        velocity: 27571.37, // Example placeholder value
-        altitude: 420.01,   // Example placeholder value
-        country: 'Not available',
-        state: 'Not available'
-      });
-    } else {
-      res.status(500).json({ message: 'Failed to fetch ISS data from external API' });
+    if (data.message !== 'success') {
+      return res.status(500).json({ message: 'Failed to fetch ISS data from external API' });
     }
+
+    const latitude = parseFloat(data.iss_position.latitude);
+    const longitude = parseFloat(data.iss_position.longitude);
+
+    // Reverse Geocoding with OpenCage
+    const geoResponse = await fetch(
+      `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${process.env.OPENCAGE_API_KEY}`
+    );
+    const geoData = await geoResponse.json();
+
+    let country = 'Not available';
+    let state = 'Not available';
+
+    if (
+      geoData &&
+      geoData.results &&
+      geoData.results.length > 0 &&
+      geoData.results[0].components
+    ) {
+      const components = geoData.results[0].components;
+      country = components.country || 'Not available';
+      state = components.state || components.region || 'Not available';
+    }
+
+    res.json({
+      latitude,
+      longitude,
+      velocity: 27571.37, // still static
+      altitude: 420.01,   // still static
+      country,
+      state
+    });
+
   } catch (error) {
     console.error('Error fetching ISS position:', error);
     res.status(500).json({ message: 'Server error fetching ISS position', error: error.message });
   }
 };
+
 
 // Register or update user location for alerts
 export const setUserLocation = async (req, res) => {

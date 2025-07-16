@@ -38,7 +38,7 @@ const App = () => {
       // In a real MERN app, this would call your backend API:
       // const response = await fetch('/api/iss/current');
       // For this environment, we simulate it or use a public API directly (with CORS considerations)
-      const response = await fetch('https://api.open-notify.org/iss-now.json');
+      const response = await fetch('/api/iss-position');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

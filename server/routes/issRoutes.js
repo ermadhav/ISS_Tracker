@@ -1,13 +1,17 @@
-// server/routes/issRoutes.js
+// In your issRoutes.js or server.js temporarily
+
 import express from 'express';
-import { getCurrentIssPosition, setUserLocation } from '../controllers/issController.js';
+import { checkAndSendAlerts } from '../controllers/issController.js';
 
 const router = express.Router();
 
-// Define route to get current ISS position
-router.get('/iss-position', getCurrentIssPosition);
-
-// Define route to set user location
-router.post('/set-location', setUserLocation);
+router.get('/test-alerts', async (req, res) => {
+  try {
+    await checkAndSendAlerts();
+    res.json({ message: 'Alert check triggered. Check server logs for details.' });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 
 export default router;

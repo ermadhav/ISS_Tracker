@@ -87,9 +87,11 @@ export const checkAndSendAlerts = async () => {
   console.log('Running ISS alert check...');
   try {
     const users = await User.find({ alertEnabled: true });
+    console.log(`Found ${users.length} users with alerts enabled.`);
 
     for (const user of users) {
       const { email, latitude, longitude, lastAlertSent } = user;
+      console.log(`Checking user: ${email} at (${latitude}, ${longitude})`);
 
       const sixHoursAgo = new Date(Date.now() - 6 * 60 * 60 * 1000);
       if (lastAlertSent && lastAlertSent.getTime() > sixHoursAgo.getTime()) {
@@ -98,8 +100,10 @@ export const checkAndSendAlerts = async () => {
       }
 
       try {
-        const passResponse = await fetch(`https://api.wheretheiss.at/v1/satellites/25544/passes?lat=${latitude}&lon=${longitude}&n=1`);
-        
+        const url = `https://api.wheretheiss.at/v1/satellites/25544/passes?lat=${latitude}&lon=${longitude}&n=1`;
+        console.log(`Fetching ISS pass from: ${url}`);
+
+        const passResponse = await fetch(url);
         if (!passResponse.ok) {
           const text = await passResponse.text();
           console.error(`API error for ${email}:`, text);
@@ -107,6 +111,7 @@ export const checkAndSendAlerts = async () => {
         }
 
         const passData = await passResponse.json();
+        console.log(`Pass data for ${email}:`, passData);
 
         if (Array.isArray(passData) && passData.length > 0) {
           const nextPass = passData[0];

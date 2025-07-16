@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
 import User from '../models/User.js';
 import { sendEmail } from '../utils/emailService.js';
 

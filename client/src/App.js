@@ -20,8 +20,8 @@ function App() {
   const [isTracking, setIsTracking] = useState(true);
 
   const [info, setInfo] = useState({
-    country: 'Indonesia',
-    state: 'South Papua',
+    // country: 'Indonesia',
+    // state: 'South Papua',
     velocity: 27574.10,
     altitude: 419.06
   });
@@ -64,8 +64,8 @@ function App() {
         boxShadow: '2px 0 5px rgba(0,0,0,0.1)'
       }}>
         <h2>TRACK THE INTERNATIONAL SPACE STATION</h2>
-        <p><strong>Country:</strong> {info.country}</p>
-        <p><strong>State:</strong> {info.state}</p>
+        {/* <p><strong>Country:</strong> {info.country}</p> */}
+        {/* <p><strong>State:</strong> {info.state}</p> */}
         <p><strong>Latitude:</strong> {issPosition.latitude.toFixed(4)}</p>
         <p><strong>Longitude:</strong> {issPosition.longitude.toFixed(4)}</p>
         <p><strong>Velocity:</strong> {info.velocity} kmph</p>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import GlobeView from './components/GlobeView';
 
-const OPENCAGE_API_KEY = 'YOUR_OPENCAGE_API_KEY'; // Replace this with your real key
+const OPENCAGE_API_KEY = '5d7b2591ded44996a37ac21c77b58f13'; // Replace this with your real key
 
 function App() {
   const [issPosition, setIssPosition] = useState({

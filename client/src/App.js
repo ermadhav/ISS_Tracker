@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import L from 'leaflet';
-import iconUrl from 'leaflet/dist/images/marker-icon.png';
-import iconShadowUrl from 'leaflet/dist/images/marker-shadow.png';
+import issIconImage from './assets/iss-icon.png'; // make sure this path is correct
 
-let DefaultIcon = L.icon({
-  iconUrl,
-  shadowUrl: iconShadowUrl,
+// Create custom ISS icon
+const issIcon = new L.Icon({
+  iconUrl: issIconImage,
+  iconSize: [50, 50],
+  iconAnchor: [25, 25],
+  popupAnchor: [0, -20],
 });
-
-L.Marker.prototype.options.icon = DefaultIcon;
 
 function App() {
   const [issPosition, setIssPosition] = useState({ latitude: 0, longitude: 0 });
+  const [issPath, setIssPath] = useState([]);
   const [isTracking, setIsTracking] = useState(true);
 
   const [info, setInfo] = useState({
@@ -30,10 +31,14 @@ function App() {
       try {
         const res = await axios.get('http://localhost:5000/api/iss-location');
         const { latitude, longitude } = res.data.iss_position;
-        setIssPosition({
-          latitude: parseFloat(latitude),
-          longitude: parseFloat(longitude)
-        });
+
+        const lat = parseFloat(latitude);
+        const lon = parseFloat(longitude);
+
+        setIssPosition({ latitude: lat, longitude: lon });
+
+        // Add to path for polyline
+        setIssPath(prevPath => [...prevPath.slice(-19), [lat, lon]]);
       } catch (error) {
         console.error('Error fetching ISS location:', error);
       }
@@ -51,7 +56,7 @@ function App() {
 
   return (
     <div style={{ display: 'flex', height: '100vh', fontFamily: 'Arial, sans-serif' }}>
-      {/* Left Side - Info */}
+      {/* Left Panel */}
       <div style={{
         flex: 1,
         padding: '30px',
@@ -78,7 +83,7 @@ function App() {
         </button>
       </div>
 
-      {/* Right Side - Map */}
+      {/* Right Panel - Map */}
       <div style={{ flex: 2 }}>
         <MapContainer
           center={[issPosition.latitude, issPosition.longitude]}
@@ -89,13 +94,26 @@ function App() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution="&copy; OpenStreetMap contributors"
           />
-          <Marker position={[issPosition.latitude, issPosition.longitude]}>
+
+          {/* ISS Marker */}
+          <Marker
+            position={[issPosition.latitude, issPosition.longitude]}
+            icon={issIcon}
+          >
             <Popup>
               ISS Current Position<br />
               Lat: {issPosition.latitude.toFixed(2)}<br />
               Long: {issPosition.longitude.toFixed(2)}
             </Popup>
           </Marker>
+
+          {/* Polyline for path */}
+          <Polyline
+            positions={issPath}
+            color="blue"
+            weight={3}
+            opacity={0.7}
+          />
         </MapContainer>
       </div>
     </div>

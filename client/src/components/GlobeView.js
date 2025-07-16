@@ -134,9 +134,9 @@ export default function ISSDashboard() {
             <div className="label">Altitude:</div>
             <div className="value">{issData.altitude.toFixed(2)} km</div>
 
-            <button className="button-stop" onClick={() => alert('Tracking stopped!')}>
+            {/* <button className="button-stop" onClick={() => alert('Tracking stopped!')}>
               STOP TRACKING
-            </button>
+            </button> */}
           </div>
         </div>
 

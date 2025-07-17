@@ -119,7 +119,7 @@ npm start
 ## 📷 Screenshots
 
 ### ISS Tracker Interface
-![ISS Tracker Demo](./screenshots/iss-tracker-demo.png)
+![ISS Tracker Demo](client\src\assets\image.png)
 
 
 ---

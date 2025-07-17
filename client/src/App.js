@@ -1,7 +1,7 @@
-// src/App.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import GlobeView from "./components/GlobeView";
+import "./App.css"; // Import the CSS here
 
 const OPENCAGE_API_KEY = "5d7b2591ded44996a37ac21c77b58f13"; // Replace with your real key
 
@@ -56,7 +56,6 @@ function App() {
 
       setPath((prev) => [...prev.slice(-19), [longitude, latitude]]);
 
-      // ✅ Alert only if enabled
       if (alertsEnabled && userLocation && email) {
         const result = await axios.post(
           "http://localhost:5000/api/check-visibility",
@@ -89,26 +88,32 @@ function App() {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        height: "100vh",
+        width: "100vw",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
       <GlobeView issPosition={issPosition} path={path} />
-      {/* Alert Control Box */}
+
       <div
         style={{
           position: "absolute",
           bottom: 20,
           left: 20,
-          width: "340px",
-          background: "rgba(255,255,255,0.1)",
+          width: "320px",
+          background: "rgba(0, 0, 0, 0.85)",
           padding: "16px",
           borderRadius: "12px",
           color: "#fff",
-          backdropFilter: "blur(10px)",
+          backdropFilter: "blur(8px)",
           zIndex: 1000,
           border: "1px solid rgba(255,255,255,0.2)",
-          fontFamily: "Segoe UI, sans-serif",
         }}
       >
-        <h4 style={{ margin: 0 }}>🔔 Get ISS Alerts</h4>
+        <h4 style={{ margin: 0, fontSize: "16px" }}>🔔 Get ISS Alerts</h4>
         <input
           type="email"
           value={email}
@@ -116,10 +121,10 @@ function App() {
           onChange={(e) => setEmail(e.target.value)}
           style={{
             width: "100%",
-            padding: "8px",
-            borderRadius: "6px",
-            border: "none",
-            margin: "10px 0",
+            padding: "10px",
+            borderRadius: "8px",
+            border: "1px solid #ccc",
+            margin: "12px 0",
             fontSize: "14px",
           }}
         />
@@ -128,12 +133,13 @@ function App() {
           style={{
             width: "100%",
             padding: "10px",
-            borderRadius: "6px",
+            borderRadius: "8px",
             backgroundColor: "#00ffd1",
             color: "#000",
-            border: "none",
             fontWeight: "bold",
+            border: "none",
             cursor: "pointer",
+            fontSize: "15px",
           }}
         >
           ✅ Start Alerts

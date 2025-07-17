@@ -145,4 +145,4 @@ MIT License – use it freely, just credit the original author 🙌
 
 **Cosmo Coder**
 Engineering Student at Arya College
-GitHub: [@your-username](https://github.com/your-username)
+GitHub: [@ermadhav](https://github.com/ermadhav)

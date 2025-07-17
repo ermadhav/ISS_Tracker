@@ -54,7 +54,7 @@ app.post('/api/check-visibility', async (req, res) => {
 
     const distance = getDistanceKm(userLat, userLng, issLat, issLng);
 
-    if (true || distance <= 1000) {
+    if (distance <= 1000) {
       await transporter.sendMail({
         from: 'yourgmail@gmail.com',
         to: email,

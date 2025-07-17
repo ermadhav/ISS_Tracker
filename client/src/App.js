@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import GlobeView from './components/GlobeView';
 
-const OPENCAGE_API_KEY = '5d7b2591ded44996a37ac21c77b58f13'; // Replace with real key
+const OPENCAGE_API_KEY = '5d7b2591ded44996a37ac21c77b58f13'; // Replace with your real key
 
 function App() {
   const [issPosition, setIssPosition] = useState({
@@ -19,6 +19,7 @@ function App() {
   const [email, setEmail] = useState('');
   const [userLocation, setUserLocation] = useState(null);
   const [message, setMessage] = useState('');
+  const [alertsEnabled, setAlertsEnabled] = useState(false);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -55,15 +56,14 @@ function App() {
 
       setPath((prev) => [...prev.slice(-19), [longitude, latitude]]);
 
-      // Check for visibility and send email
-      if (userLocation && email) {
-        await axios.post('http://localhost:5000/api/check-visibility', {
+      // ✅ Alert only if enabled
+      if (alertsEnabled && userLocation && email) {
+        const result = await axios.post('http://localhost:5000/api/check-visibility', {
           userLat: userLocation.latitude,
           userLng: userLocation.longitude,
           email,
-        }).then(res => {
-          setMessage(res.data.message);
         });
+        setMessage(result.data.message);
       }
 
     } catch (error) {
@@ -75,19 +75,31 @@ function App() {
     fetchISS();
     const interval = setInterval(fetchISS, 10000);
     return () => clearInterval(interval);
-  }, [userLocation, email]);
+  }, [userLocation, email, alertsEnabled]);
+
+  const handleStartAlerts = () => {
+    if (!email || !userLocation) {
+      setMessage('Please enter your email and allow location.');
+      return;
+    }
+    setAlertsEnabled(true);
+    setMessage('🚀 Alerts activated!');
+  };
 
   return (
     <div>
       <GlobeView issPosition={issPosition} path={path} />
+      {/* Alert Control Box */}
       <div style={{
         position: 'absolute', bottom: 20, left: 20,
+        width: '340px',
         background: 'rgba(255,255,255,0.1)',
         padding: '16px', borderRadius: '12px',
         color: '#fff', backdropFilter: 'blur(10px)', zIndex: 1000,
-        maxWidth: '340px'
+        border: '1px solid rgba(255,255,255,0.2)',
+        fontFamily: 'Segoe UI, sans-serif'
       }}>
-        <h4>🔔 Get ISS Alerts</h4>
+        <h4 style={{ margin: 0 }}>🔔 Get ISS Alerts</h4>
         <input
           type="email"
           value={email}
@@ -95,10 +107,28 @@ function App() {
           onChange={(e) => setEmail(e.target.value)}
           style={{
             width: '100%', padding: '8px', borderRadius: '6px',
-            border: 'none', marginBottom: '8px'
+            border: 'none', margin: '10px 0', fontSize: '14px'
           }}
         />
-        {message && <p style={{ color: 'lightgreen', marginTop: 4 }}>{message}</p>}
+        <button
+          onClick={handleStartAlerts}
+          style={{
+            width: '100%', padding: '10px', borderRadius: '6px',
+            backgroundColor: '#00ffd1', color: '#000', border: 'none',
+            fontWeight: 'bold', cursor: 'pointer'
+          }}
+        >
+          ✅ Start Alerts
+        </button>
+        {message && (
+          <p style={{
+            marginTop: '10px',
+            fontSize: '14px',
+            color: message.includes('not') ? 'orange' : 'lightgreen'
+          }}>
+            {message}
+          </p>
+        )}
       </div>
     </div>
   );

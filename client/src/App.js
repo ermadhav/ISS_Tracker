@@ -120,15 +120,14 @@ function App() {
           placeholder="Enter your email"
           onChange={(e) => setEmail(e.target.value)}
           style={{
-  width: "100%",
-  padding: "10px",
-  borderRadius: "8px",
-  border: "1px solid #ccc",
-  margin: "12px 0",
-  fontSize: "14px",
-  boxSizing: "border-box",  // Add this line
-}}
-
+            width: "100%",
+            padding: "10px",
+            borderRadius: "8px",
+            border: "1px solid #ccc",
+            margin: "12px 0",
+            fontSize: "14px",
+            boxSizing: "border-box", // Add this line
+          }}
         />
         <button
           onClick={handleStartAlerts}

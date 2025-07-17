@@ -146,12 +146,3 @@ MIT License – use it freely, just credit the original author 🙌
 **Cosmo Coder**
 Engineering Student at Arya College
 GitHub: [@your-username](https://github.com/your-username)
-
----
-
-Would you like me to:
-
-* Generate a real screenshot preview for the project?
-* Help you push this to GitHub with a good commit history?
-
-Let me know and I’ll help you polish it further! 🚀

@@ -116,8 +116,10 @@ npm start
 
 ---
 
-### 📷 Screenshots
+## 📷 Screenshots
 
+### ISS Tracker Interface
+![ISS Tracker Demo](./screenshots/iss-tracker-demo.png)
 
 
 ---

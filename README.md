@@ -118,11 +118,7 @@ npm start
 
 ### 📷 Screenshots
 
-> Replace with real screenshots from your app
 
-* ISS icon on 3D globe
-* Email alert form
-* ISS info card with velocity, altitude
 
 ---
 

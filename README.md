@@ -144,5 +144,4 @@ MIT License – use it freely, just credit the original author 🙌
 ### 👨‍💻 Author
 
 **Cosmo Coder**
-Engineering Student at Arya College
 GitHub: [@ermadhav](https://github.com/ermadhav)

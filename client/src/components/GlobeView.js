@@ -93,7 +93,7 @@ function GlobeView({ issPosition, path }) {
 
           const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
           const sprite = new THREE.Sprite(spriteMaterial);
-          sprite.scale.set(1.5, 1.5, 1.5); // Adjust size if needed
+          sprite.scale.set(5, 5, 5); // Adjust size if needed
           return sprite;
         }}
         customThreeObjectUpdate={(obj, d) => {

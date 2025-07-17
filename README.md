@@ -119,7 +119,7 @@ npm start
 ## 📷 Screenshots
 
 ### ISS Tracker Interface
-![ISS Tracker Demo](C:\Users\madha\OneDrive\Desktop\ISS_Tracker\client\src\assets\image.png)
+![ISS Tracker Demo]()
 
 
 ---

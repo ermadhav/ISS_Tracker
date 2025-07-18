@@ -54,7 +54,7 @@ function GlobeView({ issPosition, path }) {
 
       <div style={{
         position: 'absolute',
-        top: '15%',
+        top: '20px',
         left: '50%',
         transform: 'translateX(-50%)',
         color: '#fff',
@@ -67,7 +67,7 @@ function GlobeView({ issPosition, path }) {
         zIndex: 1000,
         fontWeight: '500'
       }}>
-        🛰 ISS Live Location
+        🛰️ ISS Live Location
       </div>
 
       <Globe

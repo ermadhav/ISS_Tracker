@@ -1,7 +1,3 @@
-Here’s a professional, clean, and informative `README.md` for your **ISS Tracker with Email Alert System**:
-
----
-
 ## 🛰️ ISS Live Tracker 🌍
 
 **Track the real-time location of the International Space Station (ISS)** on a 3D globe, and receive **email alerts** when it's passing near your location!

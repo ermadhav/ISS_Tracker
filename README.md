@@ -6,7 +6,7 @@ Here’s a professional, clean, and informative `README.md` for your **ISS Track
 
 **Track the real-time location of the International Space Station (ISS)** on a 3D globe, and receive **email alerts** when it's passing near your location!
 
-![ISS Tracker Preview](https://upload.wikimedia.org/wikipedia/commons/d/d0/ISS-64_ISS_Tracking_Map.jpg) <!-- Replace with actual screenshot if available -->
+![ISS Tracker Preview](client/src/assets/image.png) <!-- Replace with actual screenshot if available -->
 
 ---
 

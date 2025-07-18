@@ -98,20 +98,21 @@ function App() {
         fontFamily: "Segoe UI, sans-serif",
       }}
     >
-      {/* ✅ Matching Futuristic Header */}
+      {/* ✅ Centered, Neon-Futuristic Header */}
       <header
         style={{
           position: "absolute",
           top: 20,
-          left: 20,
-          padding: "10px 20px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          padding: "10px 24px",
           display: "flex",
           alignItems: "center",
           background: "rgba(255, 255, 255, 0.06)",
           border: "1px solid rgba(255, 255, 255, 0.15)",
           borderRadius: "16px",
           backdropFilter: "blur(12px)",
-          boxShadow: "0 4px 16px rgba(0, 255, 209, 0.1)",
+          boxShadow: "0 4px 16px rgba(0, 255, 209, 0.15)",
           zIndex: 1000,
         }}
       >

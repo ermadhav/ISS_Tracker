@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import GlobeView from "./components/GlobeView";
 import "./App.css";
-import logo from "./assets/image.png"; 
+import logo from "./assets/logo.png"; // Make sure this file exists
 
 const OPENCAGE_API_KEY = "5d7b2591ded44996a37ac21c77b58f13";
 
@@ -98,39 +98,52 @@ function App() {
         fontFamily: "Segoe UI, sans-serif",
       }}
     >
-      {/* Header styled like 🛰 ISS Live Location */}
+      {/* ✅ Updated Floating Header */}
       <header
         style={{
           position: "absolute",
           top: 20,
           left: "50%",
           transform: "translateX(-50%)",
-          color: "#fff",
-          fontSize: "1rem",
-          backgroundColor: "rgba(0,0,0,0.4)",
-          padding: "6px 12px",
-          borderRadius: "8px",
-          backdropFilter: "blur(4px)",
-          border: "1px solid rgba(255,255,255,0.15)",
-          zIndex: 1000,
-          fontWeight: "500",
+          width: "max-content",
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
+          backdropFilter: "blur(6px)",
+          borderRadius: "12px",
+          padding: "8px 20px",
           display: "flex",
           alignItems: "center",
-          gap: "10px",
+          gap: "12px",
+          border: "1px solid rgba(255,255,255,0.2)",
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4)",
+          zIndex: 1000,
         }}
       >
         <img
           src={logo}
           alt="Logo"
-          style={{ height: "24px", width: "24px", objectFit: "contain" }}
+          style={{
+            height: "28px",
+            width: "28px",
+            borderRadius: "6px",
+            objectFit: "cover",
+          }}
         />
-        🛰 Cosmo Tracker
+        <span
+          style={{
+            color: "#fff",
+            fontSize: "16px",
+            fontWeight: "600",
+            whiteSpace: "nowrap",
+          }}
+        >
+          🛰️ Cosmo Tracker
+        </span>
       </header>
 
-      {/* Globe */}
+      {/* 🌐 ISS Globe */}
       <GlobeView issPosition={issPosition} path={path} />
 
-      {/* Alert Box */}
+      {/* 📩 Email Alert Form */}
       <div
         style={{
           position: "absolute",
@@ -191,7 +204,7 @@ function App() {
         )}
       </div>
 
-      {/* Footer styled like 🛰 ISS Live Location */}
+      {/* ✅ Footer (unchanged, as you liked it) */}
       <footer
         style={{
           position: "absolute",

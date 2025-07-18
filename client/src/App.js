@@ -139,7 +139,7 @@ function App() {
       <div
         style={{
           position: "absolute",
-          bottom: 80,
+          bottom: 20,
           left: 20,
           width: "320px",
           background: "rgba(0, 0, 0, 0.85)",

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import GlobeView from "./components/GlobeView";
 import "./App.css";
-import logo from "./assets/logo.png"; // Make sure this file exists
+import logo from "./assets/logo.png"; // Ensure this path is correct
 
 const OPENCAGE_API_KEY = "5d7b2591ded44996a37ac21c77b58f13";
 
@@ -98,7 +98,7 @@ function App() {
         fontFamily: "Segoe UI, sans-serif",
       }}
     >
-      {/* ✅ Updated Floating Header (Centered, Clean) */}
+      {/* ✅ Clean Minimal Header */}
       <header
         style={{
           position: "absolute",
@@ -125,7 +125,7 @@ function App() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            background: "radial-gradient(circle at center, #333 30%, #111 100%)",
+            backgroundColor: "#222", // solid background
             marginRight: "12px",
           }}
         >
@@ -144,10 +144,9 @@ function App() {
           style={{
             margin: 0,
             fontSize: "18px",
-            color: "#ffffff",
+            color: "#ffffff", // pure white
             fontWeight: "600",
             letterSpacing: "0.5px",
-            textShadow: "0 0 4px rgba(255, 255, 255, 0.2)",
             fontFamily: "Segoe UI, sans-serif",
           }}
         >
@@ -155,10 +154,10 @@ function App() {
         </h1>
       </header>
 
-      {/* 🌐 ISS Globe */}
+      {/* 🌐 Globe View */}
       <GlobeView issPosition={issPosition} path={path} />
 
-      {/* 📩 Email Alert Form */}
+      {/* 📩 Email Alert Box */}
       <div
         style={{
           position: "absolute",

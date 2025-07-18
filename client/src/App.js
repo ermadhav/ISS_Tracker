@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import GlobeView from "./components/GlobeView";
 import "./App.css";
-import logo from "./assets/image.png"; // Add your logo here
+import logo from "./assets/logo.png"; // Ensure logo.png exists here
 
 const OPENCAGE_API_KEY = "5d7b2591ded44996a37ac21c77b58f13";
 
@@ -95,39 +95,40 @@ function App() {
         width: "100vw",
         position: "relative",
         overflow: "hidden",
-        display: "flex",
-        flexDirection: "column",
+        fontFamily: "Segoe UI, sans-serif",
       }}
     >
-      {/* Header */}
+      {/* Header styled like 🛰 ISS Live Location */}
       <header
         style={{
-          height: "60px",
-          width: "100%",
-          backgroundColor: "#0f0f0f",
+          position: "absolute",
+          top: 20,
+          left: "50%",
+          transform: "translateX(-50%)",
+          color: "#fff",
+          fontSize: "1rem",
+          backgroundColor: "rgba(0,0,0,0.4)",
+          padding: "6px 12px",
+          borderRadius: "8px",
+          backdropFilter: "blur(4px)",
+          border: "1px solid rgba(255,255,255,0.15)",
+          zIndex: 1000,
+          fontWeight: "500",
           display: "flex",
           alignItems: "center",
-          padding: "0 20px",
-          color: "#fff",
-          fontSize: "20px",
-          fontWeight: "bold",
-          zIndex: 1000,
-          position: "absolute",
-          top: 0,
+          gap: "10px",
         }}
       >
         <img
           src={logo}
           alt="Logo"
-          style={{ height: "40px", marginRight: "12px" }}
+          style={{ height: "24px", width: "24px", objectFit: "contain" }}
         />
-        Cosmo Tracker
+        🛰 Cosmo Tracker
       </header>
 
-      {/* Main Content (Globe) */}
-      <div style={{ flex: 1, marginTop: "60px", marginBottom: "40px" }}>
-        <GlobeView issPosition={issPosition} path={path} />
-      </div>
+      {/* Globe */}
+      <GlobeView issPosition={issPosition} path={path} />
 
       {/* Alert Box */}
       <div
@@ -190,23 +191,25 @@ function App() {
         )}
       </div>
 
-      {/* Footer */}
+      {/* Footer styled like 🛰 ISS Live Location */}
       <footer
         style={{
-          height: "40px",
-          backgroundColor: "#0f0f0f",
-          color: "#ccc",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: "14px",
           position: "absolute",
-          bottom: 0,
-          width: "100%",
+          bottom: 20,
+          left: "50%",
+          transform: "translateX(-50%)",
+          color: "#fff",
+          fontSize: "1rem",
+          backgroundColor: "rgba(0,0,0,0.4)",
+          padding: "6px 12px",
+          borderRadius: "8px",
+          backdropFilter: "blur(4px)",
+          border: "1px solid rgba(255,255,255,0.15)",
           zIndex: 1000,
+          fontWeight: "500",
         }}
       >
-        This website is made with ❤️ by <strong style={{ marginLeft: "4px" }}>Cosmo Coder</strong>
+        This website is made with ❤️ by Cosmo Coder
       </footer>
     </div>
   );

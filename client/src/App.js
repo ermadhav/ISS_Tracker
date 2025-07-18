@@ -98,61 +98,62 @@ function App() {
         fontFamily: "Segoe UI, sans-serif",
       }}
     >
-      {/* ✅ Matching Futuristic Header */}
+      {/* ✅ Updated Floating Header */}
       <header
         style={{
           position: "absolute",
           top: 20,
-          left: 20,
-          padding: "10px 20px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          background: "linear-gradient(145deg, rgba(0,255,209,0.2), rgba(255,255,255,0.05))",
+          borderRadius: "16px",
+          padding: "10px 24px",
           display: "flex",
           alignItems: "center",
-          background: "rgba(255, 255, 255, 0.06)",
-          border: "1px solid rgba(255, 255, 255, 0.15)",
-          borderRadius: "16px",
-          backdropFilter: "blur(12px)",
-          boxShadow: "0 4px 16px rgba(0, 255, 209, 0.1)",
+          gap: "14px",
+          border: "1px solid rgba(0, 255, 209, 0.3)",
+          boxShadow: "0 8px 24px rgba(0,255,209,0.1), 0 0 8px rgba(0,255,209,0.3)",
           zIndex: 1000,
+          backdropFilter: "blur(10px)",
         }}
       >
         <div
           style={{
-            width: "40px",
-            height: "40px",
+            background: "linear-gradient(135deg, #00ffd1, #007c9d)",
             borderRadius: "50%",
-            overflow: "hidden",
+            padding: "4px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            background: "radial-gradient(circle at center, #00ffd1 30%, #007c9d 100%)",
-            boxShadow: "0 0 10px rgba(0, 255, 209, 0.4)",
-            marginRight: "12px",
+            width: "36px",
+            height: "36px",
+            boxShadow: "0 0 6px rgba(0,255,209,0.6)",
           }}
         >
           <img
             src={logo}
-            alt="Cosmo Logo"
+            alt="Logo"
             style={{
               height: "24px",
               width: "24px",
-              objectFit: "cover",
               borderRadius: "4px",
+              objectFit: "cover",
             }}
           />
         </div>
-        <h1
+
+        <span
           style={{
-            margin: 0,
-            fontSize: "18px",
             color: "#00ffd1",
+            fontSize: "18px",
             fontWeight: "700",
             letterSpacing: "0.5px",
-            textShadow: "0 0 6px rgba(0,255,209,0.4)",
-            fontFamily: "Segoe UI, sans-serif",
+            textShadow: "0 0 3px rgba(0,255,209,0.6)",
+            whiteSpace: "nowrap",
           }}
         >
-          🛰 Cosmo Tracker
-        </h1>
+          🛰️ Cosmo Tracker
+        </span>
       </header>
 
       {/* 🌐 ISS Globe */}

@@ -127,20 +127,22 @@ function App() {
             margin: 0,
           }}
         >
-          Cosmo Coder
+          {/* Cosmo Coder */}
         </h1>
         <img
           src={logo}
           alt="Cosmo Logo"
           style={{
-            height: "40px",
-            width: "40px",
+            height: "150px",
+            width: "150px",
             objectFit: "cover",
             borderRadius: "6px",
             cursor: "pointer",
             transition: "transform 0.3s ease",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.15)")}
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.transform = "scale(1.15)")
+          }
           onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
         />
       </header>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import GlobeView from "./components/GlobeView";
 import "./App.css";
-import logo from "./assets/logo.png"; // Make sure this file exists
+import logo from "./assets/logo.png"; // Ensure this file exists
 
 const OPENCAGE_API_KEY = "5d7b2591ded44996a37ac21c77b58f13";
 
@@ -98,46 +98,61 @@ function App() {
         fontFamily: "Segoe UI, sans-serif",
       }}
     >
-      {/* ✅ Updated Floating Header */}
+      {/* ✅ Matching Futuristic Header */}
       <header
         style={{
           position: "absolute",
           top: 20,
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: "max-content",
-          backgroundColor: "rgba(0, 0, 0, 0.6)",
-          backdropFilter: "blur(6px)",
-          borderRadius: "12px",
-          padding: "8px 20px",
+          left: 20,
+          padding: "10px 20px",
           display: "flex",
           alignItems: "center",
-          gap: "12px",
-          border: "1px solid rgba(255,255,255,0.2)",
-          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4)",
+          background: "rgba(255, 255, 255, 0.06)",
+          border: "1px solid rgba(255, 255, 255, 0.15)",
+          borderRadius: "16px",
+          backdropFilter: "blur(12px)",
+          boxShadow: "0 4px 16px rgba(0, 255, 209, 0.1)",
           zIndex: 1000,
         }}
       >
-        <img
-          src={logo}
-          alt="Logo"
+        <div
           style={{
-            height: "28px",
-            width: "28px",
-            borderRadius: "6px",
-            objectFit: "cover",
-          }}
-        />
-        <span
-          style={{
-            color: "#fff",
-            fontSize: "16px",
-            fontWeight: "600",
-            whiteSpace: "nowrap",
+            width: "40px",
+            height: "40px",
+            borderRadius: "50%",
+            overflow: "hidden",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "radial-gradient(circle at center, #00ffd1 30%, #007c9d 100%)",
+            boxShadow: "0 0 10px rgba(0, 255, 209, 0.4)",
+            marginRight: "12px",
           }}
         >
-          🛰️ Cosmo Tracker
-        </span>
+          <img
+            src={logo}
+            alt="Cosmo Logo"
+            style={{
+              height: "24px",
+              width: "24px",
+              objectFit: "cover",
+              borderRadius: "4px",
+            }}
+          />
+        </div>
+        <h1
+          style={{
+            margin: 0,
+            fontSize: "18px",
+            color: "#00ffd1",
+            fontWeight: "700",
+            letterSpacing: "0.5px",
+            textShadow: "0 0 6px rgba(0,255,209,0.4)",
+            fontFamily: "Segoe UI, sans-serif",
+          }}
+        >
+          🛰 Cosmo Tracker
+        </h1>
       </header>
 
       {/* 🌐 ISS Globe */}
@@ -204,7 +219,7 @@ function App() {
         )}
       </div>
 
-      {/* ✅ Footer (unchanged, as you liked it) */}
+      {/* ✅ Footer */}
       <footer
         style={{
           position: "absolute",

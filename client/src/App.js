@@ -98,7 +98,7 @@ function App() {
         fontFamily: "Segoe UI, sans-serif",
       }}
     >
-      {/* Header with clean logo and text */}
+      {/* Header with logo and title, no background behind logo */}
       <header
         style={{
           position: "absolute",
@@ -108,4 +108,129 @@ function App() {
           padding: "10px 24px",
           display: "flex",
           alignItems: "center",
-          backg
+          background: "rgba(255, 255, 255, 0.06)",
+          border: "1px solid rgba(255, 255, 255, 0.15)",
+          borderRadius: "16px",
+          backdropFilter: "blur(12px)",
+          boxShadow: "0 4px 16px rgba(255, 255, 255, 0.08)",
+          zIndex: 1000,
+        }}
+      >
+        <img
+          src={logo}
+          alt="Cosmo Logo"
+          style={{
+            height: "40px",
+            width: "40px",
+            objectFit: "cover",
+            borderRadius: "6px",
+            marginRight: "12px",
+            cursor: "pointer",
+            transition: "transform 0.3s ease",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.15)")}
+          onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+        />
+        <h1
+          style={{
+            color: "#00ffd1", // neon blue, no glow
+            fontWeight: "700",
+            fontSize: "1.25rem",
+            letterSpacing: "1.5px",
+            userSelect: "none",
+            margin: 0,
+          }}
+        >
+          Cosmo Coder
+        </h1>
+      </header>
+
+      {/* Globe View */}
+      <GlobeView issPosition={issPosition} path={path} />
+
+      {/* Email Alert Box */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 80,
+          left: 20,
+          width: "320px",
+          background: "rgba(0, 0, 0, 0.85)",
+          padding: "16px",
+          borderRadius: "12px",
+          color: "#fff",
+          backdropFilter: "blur(8px)",
+          zIndex: 1000,
+          border: "1px solid rgba(255,255,255,0.2)",
+        }}
+      >
+        <h4 style={{ margin: 0, fontSize: "16px" }}>🔔 Get ISS Alerts</h4>
+        <input
+          type="email"
+          value={email}
+          placeholder="Enter your email"
+          onChange={(e) => setEmail(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "10px",
+            borderRadius: "8px",
+            border: "1px solid #ccc",
+            margin: "12px 0",
+            fontSize: "14px",
+            boxSizing: "border-box",
+          }}
+        />
+        <button
+          onClick={handleStartAlerts}
+          style={{
+            width: "100%",
+            padding: "10px",
+            borderRadius: "8px",
+            backgroundColor: "#00ffd1",
+            color: "#000",
+            fontWeight: "bold",
+            border: "none",
+            cursor: "pointer",
+            fontSize: "15px",
+          }}
+        >
+          ✅ Start Alerts
+        </button>
+        {message && (
+          <p
+            style={{
+              marginTop: "10px",
+              fontSize: "14px",
+              color: message.includes("not") ? "orange" : "lightgreen",
+            }}
+          >
+            {message}
+          </p>
+        )}
+      </div>
+
+      {/* Footer */}
+      <footer
+        style={{
+          position: "absolute",
+          bottom: 20,
+          left: "50%",
+          transform: "translateX(-50%)",
+          color: "#fff",
+          fontSize: "1rem",
+          backgroundColor: "rgba(0,0,0,0.4)",
+          padding: "6px 12px",
+          borderRadius: "8px",
+          backdropFilter: "blur(4px)",
+          border: "1px solid rgba(255,255,255,0.15)",
+          zIndex: 1000,
+          fontWeight: "500",
+        }}
+      >
+        This website is made with ❤️ by Cosmo Coder
+      </footer>
+    </div>
+  );
+}
+
+export default App;

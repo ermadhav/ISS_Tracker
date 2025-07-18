@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import GlobeView from "./components/GlobeView";
 import "./App.css";
-import logo from "./assets/image.png"; // Make sure this file exists
+import logo from "./assets/logo.png"; // Make sure this file exists
 
 const OPENCAGE_API_KEY = "5d7b2591ded44996a37ac21c77b58f13";
 

@@ -8,7 +8,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Basic ISS location API
 app.get('/api/iss-location', async (req, res) => {
   try {
     const response = await axios.get('http://api.open-notify.org/iss-now.json');
@@ -34,16 +33,14 @@ function getDistanceKm(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
-// Email transporter setup
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'madhavtiwari2024@gmail.com',          // replace with your email
-    pass: 'litp xhcv cpdy yomo',            // use App Password from Gmail
+    user: 'madhavtiwari2024@gmail.com',          
+    pass: 'litp xhcv cpdy yomo',            
   }
 });
 
-// ISS Visibility API
 app.post('/api/check-visibility', async (req, res) => {
   const { userLat, userLng, email } = req.body;
 
@@ -56,7 +53,7 @@ app.post('/api/check-visibility', async (req, res) => {
 
     if (distance <= 1000) {
       await transporter.sendMail({
-        from: 'yourgmail@gmail.com',
+        from: 'madhavtiwari2024@gmail.com',
         to: email,
         subject: '🚀 ISS is Overhead!',
         text: `Look up! The ISS is currently passing near you.\n\nLatitude: ${issLat}\nLongitude: ${issLng}`,

@@ -18,7 +18,6 @@ function GlobeView({ issPosition, path }) {
 
   return (
     <div style={{ height: '100vh', backgroundColor: '#000', position: 'relative' }}>
-      {/* Info Panel */}
       <div style={{
         position: 'absolute',
         top: 20,
@@ -53,7 +52,6 @@ function GlobeView({ issPosition, path }) {
         <p><strong>🛰️ Altitude:</strong> {issPosition.altitude.toFixed(2)} km</p>
       </div>
 
-      {/* Floating ISS Label */}
       <div style={{
         position: 'absolute',
         top: '15%',
@@ -72,7 +70,6 @@ function GlobeView({ issPosition, path }) {
         🛰 ISS Live Location
       </div>
 
-      {/* Globe with only ISS icon */}
       <Globe
         ref={globeRef}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
@@ -93,7 +90,7 @@ function GlobeView({ issPosition, path }) {
 
           const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
           const sprite = new THREE.Sprite(spriteMaterial);
-          sprite.scale.set(7, 7, 7); // Adjust size if needed
+          sprite.scale.set(7, 7, 7); 
           return sprite;
         }}
         customThreeObjectUpdate={(obj, d) => {

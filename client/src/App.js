@@ -98,7 +98,7 @@ function App() {
         fontFamily: "Segoe UI, sans-serif",
       }}
     >
-      {/* ✅ Clean Minimal Header */}
+      {/* ✅ Clean Minimal Header with glowing logo and hover */}
       <header
         style={{
           position: "absolute",
@@ -118,28 +118,53 @@ function App() {
       >
         <div
           style={{
-            width: "40px",
-            height: "40px",
+            width: "50px",
+            height: "50px",
             borderRadius: "50%",
             overflow: "hidden",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: "#222", // solid background
+            background: "linear-gradient(135deg, #00ffd1, #0047ff)", // gradient background
+            boxShadow: "0 0 10px #00ffd1, 0 0 20px #00ffd1", // glowing effect
             marginRight: "12px",
+            cursor: "pointer",
+            transition: "transform 0.3s ease, box-shadow 0.3s ease",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.15)";
+            e.currentTarget.style.boxShadow = "0 0 20px #00ffd1, 0 0 40px #00ffd1";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+            e.currentTarget.style.boxShadow = "0 0 10px #00ffd1, 0 0 20px #00ffd1";
           }}
         >
           <img
             src={logo}
             alt="Cosmo Logo"
             style={{
-              height: "24px",
-              width: "24px",
+              height: "28px",
+              width: "28px",
               objectFit: "cover",
-              borderRadius: "4px",
+              borderRadius: "6px",
+              filter: "drop-shadow(0 0 2px #00ffd1)",
             }}
           />
         </div>
+        <h1
+          style={{
+            color: "#00ffd1",
+            fontWeight: "700",
+            fontSize: "1.25rem",
+            letterSpacing: "1.5px",
+            userSelect: "none",
+            textShadow: "0 0 5px #00ffd1",
+            margin: 0,
+          }}
+        >
+          Cosmo Coder
+        </h1>
       </header>
 
       {/* 🌐 Globe View */}

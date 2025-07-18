@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import GlobeView from "./components/GlobeView";
 import "./App.css";
-import logo from "./assets/logo.png"; // Ensure this file exists
+import logo from "./assets/logo.png"; // Make sure this file exists
 
 const OPENCAGE_API_KEY = "5d7b2591ded44996a37ac21c77b58f13";
 
@@ -98,7 +98,7 @@ function App() {
         fontFamily: "Segoe UI, sans-serif",
       }}
     >
-      {/* ✅ Centered, Neon-Futuristic Header */}
+      {/* ✅ Updated Floating Header (Centered, Clean) */}
       <header
         style={{
           position: "absolute",
@@ -112,7 +112,7 @@ function App() {
           border: "1px solid rgba(255, 255, 255, 0.15)",
           borderRadius: "16px",
           backdropFilter: "blur(12px)",
-          boxShadow: "0 4px 16px rgba(0, 255, 209, 0.15)",
+          boxShadow: "0 4px 16px rgba(255, 255, 255, 0.08)",
           zIndex: 1000,
         }}
       >
@@ -125,8 +125,7 @@ function App() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            background: "radial-gradient(circle at center, #00ffd1 30%, #007c9d 100%)",
-            boxShadow: "0 0 10px rgba(0, 255, 209, 0.4)",
+            background: "radial-gradient(circle at center, #333 30%, #111 100%)",
             marginRight: "12px",
           }}
         >
@@ -145,10 +144,10 @@ function App() {
           style={{
             margin: 0,
             fontSize: "18px",
-            color: "#00ffd1",
-            fontWeight: "700",
+            color: "#ffffff",
+            fontWeight: "600",
             letterSpacing: "0.5px",
-            textShadow: "0 0 6px rgba(0,255,209,0.4)",
+            textShadow: "0 0 4px rgba(255, 255, 255, 0.2)",
             fontFamily: "Segoe UI, sans-serif",
           }}
         >

@@ -98,12 +98,12 @@ function App() {
         fontFamily: "Segoe UI, sans-serif",
       }}
     >
-      {/* Header shifted to top-left */}
+      {/* Header shifted to top-right */}
       <header
         style={{
           position: "absolute",
           top: 20,
-          left: 20,
+          right: 20,
           padding: "10px 24px",
           display: "flex",
           alignItems: "center",

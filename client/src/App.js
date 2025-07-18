@@ -140,18 +140,6 @@ function App() {
             }}
           />
         </div>
-        <h1
-          style={{
-            margin: 0,
-            fontSize: "18px",
-            color: "#ffffff", // pure white
-            fontWeight: "600",
-            letterSpacing: "0.5px",
-            fontFamily: "Segoe UI, sans-serif",
-          }}
-        >
-          🛰 Cosmo Tracker
-        </h1>
       </header>
 
       {/* 🌐 Globe View */}

@@ -104,11 +104,11 @@ function App() {
           position: "absolute",
           top: 20,
           right: 20,
-          padding: "10px 24px",
+          padding: "10px 10px",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          width: "320px",
+          width: "150px",
           background: "rgba(255, 255, 255, 0.06)",
           border: "1px solid rgba(255, 255, 255, 0.15)",
           borderRadius: "16px",
@@ -117,7 +117,7 @@ function App() {
           zIndex: 1000,
         }}
       >
-        <h1
+        {/* <h1
           style={{
             color: "#00ffd1",
             fontWeight: "700",
@@ -127,8 +127,8 @@ function App() {
             margin: 0,
           }}
         >
-          {/* Cosmo Coder */}
-        </h1>
+          Cosmo Coder
+        </h1> */}
         <img
           src={logo}
           alt="Cosmo Logo"

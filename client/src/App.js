@@ -98,7 +98,6 @@ function App() {
         fontFamily: "Segoe UI, sans-serif",
       }}
     >
-      {/* Header shifted to top-right */}
       <header
         style={{
           position: "absolute",
@@ -117,18 +116,6 @@ function App() {
           zIndex: 1000,
         }}
       >
-        {/* <h1
-          style={{
-            color: "#00ffd1",
-            fontWeight: "700",
-            fontSize: "1.25rem",
-            letterSpacing: "1.5px",
-            userSelect: "none",
-            margin: 0,
-          }}
-        >
-          Cosmo Coder
-        </h1> */}
         <img
           src={logo}
           alt="Cosmo Logo"
@@ -147,10 +134,8 @@ function App() {
         />
       </header>
 
-      {/* Globe View */}
       <GlobeView issPosition={issPosition} path={path} />
 
-      {/* Email Alert Box */}
       <div
         style={{
           position: "absolute",
@@ -211,7 +196,6 @@ function App() {
         )}
       </div>
 
-      {/* Footer */}
       <footer
         style={{
           position: "absolute",

@@ -28,23 +28,6 @@
 
 ---
 
-### 📁 Folder Structure
-
-```
-📦 iss-tracker
-├── 📁 src
-│   ├── 📄 App.js
-│   ├── 📁 components
-│   │   └── 📄 GlobeView.js
-│   └── 📁 assets
-│       └── 🖼️ iss-icon.png
-├── 📄 server.js
-├── 📄 package.json
-└── 📄 README.md
-```
-
----
-
 ### 🛠️ Setup Instructions
 
 #### 🔹 1. Clone the Repository

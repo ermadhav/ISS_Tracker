@@ -54,7 +54,7 @@ Here’s a professional, clean, and informative `README.md` for your **ISS Track
 #### 🔹 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/iss-tracker.git
+git clone https://github.com/ermadhav/iss-tracker.git
 cd iss-tracker
 ```
 
@@ -119,7 +119,7 @@ npm start
 ## 📷 Screenshots
 
 ### ISS Tracker Interface
-![ISS Tracker Demo]()
+![ISS Tracker Demo](client/src/assets/screenshot.png)
 
 
 ---

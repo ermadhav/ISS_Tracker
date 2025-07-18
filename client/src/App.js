@@ -98,7 +98,7 @@ function App() {
         fontFamily: "Segoe UI, sans-serif",
       }}
     >
-      {/* Header with logo and title, no background behind logo */}
+      {/* Header with text left and logo right */}
       <header
         style={{
           position: "absolute",
@@ -108,6 +108,8 @@ function App() {
           padding: "10px 24px",
           display: "flex",
           alignItems: "center",
+          justifyContent: "space-between",
+          width: "320px", // control width so content doesn't stretch too much
           background: "rgba(255, 255, 255, 0.06)",
           border: "1px solid rgba(255, 255, 255, 0.15)",
           borderRadius: "16px",
@@ -116,24 +118,9 @@ function App() {
           zIndex: 1000,
         }}
       >
-        <img
-          src={logo}
-          alt="Cosmo Logo"
-          style={{
-            height: "40px",
-            width: "40px",
-            objectFit: "cover",
-            borderRadius: "6px",
-            marginRight: "12px",
-            cursor: "pointer",
-            transition: "transform 0.3s ease",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.15)")}
-          onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-        />
         <h1
           style={{
-            color: "#00ffd1", // neon blue, no glow
+            color: "#00ffd1",
             fontWeight: "700",
             fontSize: "1.25rem",
             letterSpacing: "1.5px",
@@ -143,6 +130,20 @@ function App() {
         >
           Cosmo Coder
         </h1>
+        <img
+          src={logo}
+          alt="Cosmo Logo"
+          style={{
+            height: "40px",
+            width: "40px",
+            objectFit: "cover",
+            borderRadius: "6px",
+            cursor: "pointer",
+            transition: "transform 0.3s ease",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.15)")}
+          onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+        />
       </header>
 
       {/* Globe View */}

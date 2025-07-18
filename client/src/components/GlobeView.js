@@ -1,7 +1,7 @@
 // src/components/GlobeView.js
 import React, { useRef, useEffect } from 'react';
 import Globe from 'react-globe.gl';
-import issIcon from '../assets/iss-icon.png';
+import issIcon from '../assets/icon3.png';
 import * as THREE from 'three';
 
 function GlobeView({ issPosition, path }) {
@@ -93,7 +93,7 @@ function GlobeView({ issPosition, path }) {
 
           const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
           const sprite = new THREE.Sprite(spriteMaterial);
-          sprite.scale.set(5, 5, 5); // Adjust size if needed
+          sprite.scale.set(7, 7, 7); // Adjust size if needed
           return sprite;
         }}
         customThreeObjectUpdate={(obj, d) => {

@@ -13,6 +13,7 @@
 * 🌐 Real-time tracking of the ISS on a 3D globe using `react-globe.gl`
 * 🛰️ Animated ISS icon with smooth camera follow
 * 📍 Displays country, state, coordinates, altitude, and velocity
+* 🧑‍🚀 Shows the **current astronauts aboard the ISS**, including their names and roles
 * ✉️ Sends **email alerts** when ISS is flying over your location
 * 🌎 Uses **OpenCage Geocoding API** and **Gmail SMTP** for alerts
 

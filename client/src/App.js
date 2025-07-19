@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import GlobeView from "./components/GlobeView";
+import SkyMapView from "./components/SkyMapView";
+import LiveFeed from "./components/LiveFeed";
 import "./App.css";
 import logo from "./assets/logo2.png";
 
@@ -22,7 +24,8 @@ function App() {
   const [userLocation, setUserLocation] = useState(null);
   const [message, setMessage] = useState("");
   const [alertsEnabled, setAlertsEnabled] = useState(false);
-  const [astronauts, setAstronauts] = useState([]); // State for astronauts
+  const [astronauts, setAstronauts] = useState([]);
+  const [view, setView] = useState("globe");
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -51,18 +54,16 @@ function App() {
       setIssPosition({
         latitude,
         longitude,
-        velocity: issRes.data.velocity || 27574.1, // Fallback values
-        altitude: issRes.data.altitude || 419.06, // Fallback values
+        velocity: issRes.data.velocity || 27574.1,
+        altitude: issRes.data.altitude || 419.06,
         country,
         state,
       });
 
       setPath((prev) => [...prev.slice(-19), [longitude, latitude]]);
 
-      // Fetch astronauts
       const astrosRes = await axios.get("http://localhost:5000/api/iss-astronauts");
       if (astrosRes.data && astrosRes.data.people) {
-        // Filter to only include astronauts whose craft is "ISS"
         const issAstronauts = astrosRes.data.people.filter(
           (astro) => astro.craft === "ISS"
         );
@@ -101,178 +102,54 @@ function App() {
   };
 
   return (
-    <div
-      style={{
-        height: "100vh",
-        width: "100vw",
-        position: "relative",
-        overflow: "hidden",
-        fontFamily: "Segoe UI, sans-serif",
-      }}
-    >
-      <header
-        style={{
-          position: "absolute",
-          top: 20,
-          right: 20,
-          padding: "10px 10px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          width: "150px",
-          background: "rgba(255, 255, 255, 0.06)",
-          border: "1px solid rgba(255, 255, 255, 0.15)",
-          borderRadius: "16px",
-          backdropFilter: "blur(12px)",
-          boxShadow: "0 4px 16px rgba(255, 255, 255, 0.08)",
-          zIndex: 1000,
-        }}
-      >
-        <img
-          src={logo}
-          alt="Cosmo Logo"
-          style={{
-            height: "150px",
-            width: "150px",
-            objectFit: "cover",
-            borderRadius: "6px",
-            cursor: "pointer",
-            transition: "transform 0.3s ease",
-          }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.transform = "scale(1.15)")
-          }
-          onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-        />
+    <div style={{ height: "100vh", width: "100vw", position: "relative", overflow: "hidden", fontFamily: "Segoe UI, sans-serif" }}>
+      <header style={{ position: "absolute", top: 20, right: 20, padding: "10px 10px", display: "flex", alignItems: "center", justifyContent: "space-between", width: "150px", background: "rgba(255, 255, 255, 0.06)", border: "1px solid rgba(255, 255, 255, 0.15)", borderRadius: "16px", backdropFilter: "blur(12px)", boxShadow: "0 4px 16px rgba(255, 255, 255, 0.08)", zIndex: 1000 }}>
+        <img src={logo} alt="Cosmo Logo" style={{ height: "150px", width: "150px", objectFit: "cover", borderRadius: "6px", cursor: "pointer", transition: "transform 0.3s ease" }} onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.15)")} onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")} />
       </header>
 
-      <GlobeView issPosition={issPosition} path={path} />
-
-      {/* Astronaut Details Panel - Moved to bottom right, styled, with scroll */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: 20,
-          right: 20, // Positioned on the right
-          padding: '20px 25px',
-          backdropFilter: 'blur(10px)',
-          background: 'rgba(255, 255, 255, 0.1)',
-          border: '1px solid rgba(255, 255, 255, 0.2)',
-          borderRadius: '16px',
-          color: '#fff',
-          fontFamily: 'Segoe UI, sans-serif',
-          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
-          zIndex: 1000,
-          maxWidth: '320px',
-          fontSize: '15px',
-          lineHeight: '1.6',
-          maxHeight: '400px', // Decreased height
-          overflowY: 'auto' // Added scrollbar
-        }}
-      >
-        <h3 style={{
-          marginTop: 0,
-          marginBottom: 10,
-          fontSize: '18px',
-          color: '#00ffd1',
-          fontWeight: '600'
-        }}>
-          🧑‍🚀 Astronauts on ISS ({astronauts.length})
-        </h3>
-        {astronauts.length > 0 ? (
-          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {astronauts.map((astro, index) => (
-              <li key={index} style={{ marginBottom: "10px", fontSize: "14px" }}>
-                <strong>👤 Name:</strong> {astro.name} <br/>
-                {/* <strong>🚀 Craft:</strong> {astro.craft} <br/> */}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>Loading astronaut data...</p>
-        )}
+      <div style={{ position: "absolute", top: 20, left: 180, zIndex: 1001, display: "flex", gap: "10px", background: "rgba(255, 255, 255, 0.1)", padding: "8px 12px", borderRadius: "12px", backdropFilter: "blur(10px)", border: "1px solid rgba(255,255,255,0.2)" }}>
+        <button onClick={() => setView("globe")} style={{ background: view === "globe" ? "#00ffd1" : "transparent", color: "#000", padding: "6px 12px", borderRadius: "6px", border: "none", cursor: "pointer" }}>🌐 Globe</button>
+        <button onClick={() => setView("sky")} style={{ background: view === "sky" ? "#00ffd1" : "transparent", color: "#000", padding: "6px 12px", borderRadius: "6px", border: "none", cursor: "pointer" }}>🌌 Sky Map</button>
+        <button onClick={() => setView("feed")} style={{ background: view === "feed" ? "#00ffd1" : "transparent", color: "#000", padding: "6px 12px", borderRadius: "6px", border: "none", cursor: "pointer" }}>📺 Live Feed</button>
       </div>
 
+      {view === "globe" && <GlobeView issPosition={issPosition} path={path} />}
+      {view === "sky" && <SkyMapView userLocation={userLocation} />}
+      {view === "feed" && <LiveFeed />}
 
-      <div
-        style={{
-          position: "absolute",
-          bottom: 20,
-          left: 20,
-          width: "320px",
-          background: "rgba(0, 0, 0, 0.85)",
-          padding: "16px",
-          borderRadius: "12px",
-          color: "#fff",
-          backdropFilter: "blur(8px)",
-          zIndex: 1000,
-          border: "1px solid rgba(255,255,255,0.2)",
-        }}
-      >
-        <h4 style={{ margin: 0, fontSize: "16px" }}>🔔 Get ISS Alerts</h4>
-        <input
-          type="email"
-          value={email}
-          placeholder="Enter your email"
-          onChange={(e) => setEmail(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "10px",
-            borderRadius: "8px",
-            border: "1px solid #ccc",
-            margin: "12px 0",
-            fontSize: "14px",
-            boxSizing: "border-box",
-            backgroundColor: "#fff",
-            color: "#000"
-          }}
-        />
-        <button
-          onClick={handleStartAlerts}
-          style={{
-            width: "100%",
-            padding: "10px",
-            borderRadius: "8px",
-            backgroundColor: "#00ffd1",
-            color: "#000",
-            fontWeight: "bold",
-            border: "none",
-            cursor: "pointer",
-            fontSize: "15px",
-          }}
-        >
-          ✅ Start Alerts
-        </button>
-        {message && (
-          <p
-            style={{
-              marginTop: "10px",
-              fontSize: "14px",
-              color: message.includes("not") ? "orange" : "lightgreen",
-            }}
-          >
-            {message}
-          </p>
-        )}
-      </div>
+      {view === "globe" && (
+        <div style={{ position: "absolute", bottom: 20, right: 20, padding: '20px 25px', backdropFilter: 'blur(10px)', background: 'rgba(255, 255, 255, 0.1)', border: '1px solid rgba(255, 255, 255, 0.2)', borderRadius: '16px', color: '#fff', fontFamily: 'Segoe UI, sans-serif', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)', zIndex: 1000, maxWidth: '320px', fontSize: '15px', lineHeight: '1.6', maxHeight: '400px', overflowY: 'auto' }}>
+          <h3 style={{ marginTop: 0, marginBottom: 10, fontSize: '18px', color: '#00ffd1', fontWeight: '600' }}>🧑‍🚀 Astronauts on ISS ({astronauts.length})</h3>
+          {astronauts.length > 0 ? (
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+              {astronauts.map((astro, index) => (
+                <li key={index} style={{ marginBottom: "10px", fontSize: "14px" }}>
+                  <strong>👤 Name:</strong> {astro.name} <br />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>Loading astronaut data...</p>
+          )}
+        </div>
+      )}
 
-      <footer
-        style={{
-          position: "absolute",
-          bottom: 20,
-          left: "50%",
-          transform: "translateX(-50%)",
-          color: "#fff",
-          fontSize: "1rem",
-          backgroundColor: "rgba(0,0,0,0.4)",
-          padding: "6px 12px",
-          borderRadius: "8px",
-          backdropFilter: "blur(4px)",
-          border: "1px solid rgba(255,255,255,0.15)",
-          zIndex: 1000,
-          fontWeight: "500",
-        }}
-      >
+      {view === "globe" && (
+        <div style={{ position: "absolute", bottom: 20, left: 20, width: "320px", background: "rgba(0, 0, 0, 0.85)", padding: "16px", borderRadius: "12px", color: "#fff", backdropFilter: "blur(8px)", zIndex: 1000, border: "1px solid rgba(255,255,255,0.2)" }}>
+          <h4 style={{ margin: 0, fontSize: "16px" }}>🔔 Get ISS Alerts</h4>
+          <input type="email" value={email} placeholder="Enter your email" onChange={(e) => setEmail(e.target.value)} style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #ccc", margin: "12px 0", fontSize: "14px", boxSizing: "border-box", backgroundColor: "#fff", color: "#000" }} />
+          <button onClick={handleStartAlerts} style={{ width: "100%", padding: "10px", borderRadius: "8px", backgroundColor: "#00ffd1", color: "#000", fontWeight: "bold", border: "none", cursor: "pointer", fontSize: "15px" }}>
+            ✅ Start Alerts
+          </button>
+          {message && (
+            <p style={{ marginTop: "10px", fontSize: "14px", color: message.includes("not") ? "orange" : "lightgreen" }}>
+              {message}
+            </p>
+          )}
+        </div>
+      )}
+
+      <footer style={{ position: "absolute", bottom: 20, left: "50%", transform: "translateX(-50%)", color: "#fff", fontSize: "1rem", backgroundColor: "rgba(0,0,0,0.4)", padding: "6px 12px", borderRadius: "8px", backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.15)", zIndex: 1000, fontWeight: "500" }}>
         This website is made with ❤️ by Cosmo Coder
       </footer>
     </div>

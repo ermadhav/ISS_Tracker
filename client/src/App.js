@@ -182,7 +182,7 @@ function App() {
                 <strong>👤 Name:</strong> {astro.name} <br/>
                 <strong>🚀 Craft:</strong> {astro.craft} <br/>
                 {/* Placeholder for country/flag as direct data is not available from OpenNotify */}
-                <strong>🌍 Country:</strong> Unknown (Data not available via OpenNotify API)
+                {/* <strong>🌍 Country:</strong> Unknown (Data not available via OpenNotify API) */}
               </li>
             ))}
           </ul>
@@ -274,7 +274,7 @@ function App() {
         This website is made with ❤️ by Cosmo Coder
       </footer>
     </div>
-  );
+  );  
 }
 
 export default App;

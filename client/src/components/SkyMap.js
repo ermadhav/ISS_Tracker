@@ -1,7 +1,7 @@
-// src/components/SkyMap.js
+// src/components/SkyMapView.js
 import React, { useEffect, useRef, useState } from "react";
 
-function SkyMap() {
+function SkyMapView({ userLocation }) {
   const skyRef = useRef(null);
   const [error, setError] = useState("");
 
@@ -29,17 +29,21 @@ function SkyMap() {
       });
     };
 
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const { latitude, longitude } = pos.coords;
-        loadSkyMap(latitude, longitude);
-      },
-      (err) => {
-        setError("Location permission denied. Cannot show sky map.");
-        console.error(err);
-      }
-    );
-  }, []);
+    if (userLocation) {
+      loadSkyMap(userLocation.latitude, userLocation.longitude);
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const { latitude, longitude } = pos.coords;
+          loadSkyMap(latitude, longitude);
+        },
+        (err) => {
+          setError("Location permission denied. Cannot show sky map.");
+          console.error(err);
+        }
+      );
+    }
+  }, [userLocation]);
 
   return (
     <div style={{ height: "100vh", width: "100vw", backgroundColor: "#000" }}>
@@ -69,4 +73,4 @@ function SkyMap() {
   );
 }
 
-export default SkyMap;
+export default SkyMapView;

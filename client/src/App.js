@@ -166,7 +166,7 @@ function App() {
           maxWidth: '320px',
           fontSize: '15px',
           lineHeight: '1.6',
-          maxHeight: '250px', // Decreased height
+          maxHeight: '400px', // Decreased height
           overflowY: 'auto' // Added scrollbar
         }}
       >

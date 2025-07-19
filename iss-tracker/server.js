@@ -1,3 +1,4 @@
+// server.js
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
@@ -16,18 +17,17 @@ app.get('/api/iss-location', async (req, res) => {
   }
 });
 
-// ✅ New route: Get astronauts aboard ISS
-app.get('/api/astronauts', async (req, res) => {
+// New endpoint to fetch ISS astronauts
+app.get('/api/iss-astronauts', async (req, res) => {
   try {
     const response = await axios.get('http://api.open-notify.org/astros.json');
-    const peopleInISS = response.data.people.filter(p => p.craft === 'ISS');
-    res.json({ astronauts: peopleInISS });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to fetch astronauts data' });
+    res.json(response.data);
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to fetch ISS astronauts' });
   }
 });
 
+// Haversine distance formula
 function getDistanceKm(lat1, lon1, lat2, lon2) {
   const R = 6371;
   const toRad = deg => deg * Math.PI / 180;

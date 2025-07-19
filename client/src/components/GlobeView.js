@@ -42,7 +42,7 @@ function GlobeView({ issPosition, path }) {
           color: '#00ffd1',
           fontWeight: '600'
         }}>
-          🛰️ Track the International Space Station
+          🛰️ Details International Space Station
         </h3>
         <p><strong>🌍 Country:</strong> {issPosition.country}</p>
         <p><strong>📍 State:</strong> {issPosition.state || 'N/A'}</p>

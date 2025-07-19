@@ -6,6 +6,11 @@ function SkyMapView({ userLocation }) {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    if (!userLocation) {
+      setError("Waiting for location...");
+      return;
+    }
+
     const loadSkyMap = (lat, lng) => {
       if (!window.virtualsky) {
         setError("virtualsky script not loaded.");
@@ -29,20 +34,7 @@ function SkyMapView({ userLocation }) {
       });
     };
 
-    if (userLocation) {
-      loadSkyMap(userLocation.latitude, userLocation.longitude);
-    } else {
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          const { latitude, longitude } = pos.coords;
-          loadSkyMap(latitude, longitude);
-        },
-        (err) => {
-          setError("Location permission denied. Cannot show sky map.");
-          console.error(err);
-        }
-      );
-    }
+    loadSkyMap(userLocation.latitude, userLocation.longitude);
   }, [userLocation]);
 
   return (

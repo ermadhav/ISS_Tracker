@@ -21,12 +21,7 @@
 
 ### 📦 Technologies Used
 
-* **Frontend**: 
-* [React] 
-* [react-globe.gl]
-* [Three.js]
-* [Axios]
-
+* **Frontend**: React, react-globe.gl, Three.js, Axios
 * **Backend**: Node.js, Express, Axios, Nodemailer
 * **APIs**:
 

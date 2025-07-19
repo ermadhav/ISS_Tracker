@@ -181,8 +181,6 @@ function App() {
               <li key={index} style={{ marginBottom: "10px", fontSize: "14px" }}>
                 <strong>👤 Name:</strong> {astro.name} <br/>
                 <strong>🚀 Craft:</strong> {astro.craft} <br/>
-                {/* Placeholder for country/flag as direct data is not available from OpenNotify */}
-                {/* <strong>🌍 Country:</strong> Unknown (Data not available via OpenNotify API) */}
               </li>
             ))}
           </ul>

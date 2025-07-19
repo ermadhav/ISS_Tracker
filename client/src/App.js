@@ -184,7 +184,7 @@ function App() {
             {astronauts.map((astro, index) => (
               <li key={index} style={{ marginBottom: "10px", fontSize: "14px" }}>
                 <strong>👤 Name:</strong> {astro.name} <br/>
-                <strong>🚀 Craft:</strong> {astro.craft} <br/>
+                {/* <strong>🚀 Craft:</strong> {astro.craft} <br/> */}
               </li>
             ))}
           </ul>

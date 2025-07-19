@@ -62,7 +62,11 @@ function App() {
       // Fetch astronauts
       const astrosRes = await axios.get("http://localhost:5000/api/iss-astronauts");
       if (astrosRes.data && astrosRes.data.people) {
-        setAstronauts(astrosRes.data.people);
+        // Filter to only include astronauts whose craft is "ISS"
+        const issAstronauts = astrosRes.data.people.filter(
+          (astro) => astro.craft === "ISS"
+        );
+        setAstronauts(issAstronauts);
       }
 
       if (alertsEnabled && userLocation && email) {
@@ -272,7 +276,7 @@ function App() {
         This website is made with ❤️ by Cosmo Coder
       </footer>
     </div>
-  );  
+  );
 }
 
 export default App;

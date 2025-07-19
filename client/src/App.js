@@ -164,7 +164,7 @@ function App() {
           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
           zIndex: 1000,
           maxWidth: '320px',
-          fontSize: '25px',
+          fontSize: '15px',
           lineHeight: '1.6',
           maxHeight: '400px', // Decreased height
           overflowY: 'auto' // Added scrollbar

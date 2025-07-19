@@ -52,7 +52,7 @@ function GlobeView({ issPosition, path }) {
         <p><strong>🛰️ Altitude:</strong> {issPosition.altitude.toFixed(2)} km</p>
       </div>
 
-      <div style={{
+      {/* <div style={{
         position: 'absolute',
         top: '20px',
         left: '50%',
@@ -68,8 +68,8 @@ function GlobeView({ issPosition, path }) {
         fontWeight: '500'
       }}>
         🛰️ ISS Live Location
-      </div>
-
+      </div> */}
+  
       <Globe
         ref={globeRef}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"

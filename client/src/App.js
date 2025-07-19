@@ -153,7 +153,7 @@ function App() {
         style={{
           position: "absolute",
           top: 20,
-          left: 180,
+          left: '50%',
           zIndex: 1001,
           display: "flex",
           gap: "10px",

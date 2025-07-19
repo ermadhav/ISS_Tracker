@@ -1,4 +1,4 @@
-// server.js
+// server.js (No changes needed, as the API for astronauts is already set up)
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
@@ -17,7 +17,6 @@ app.get('/api/iss-location', async (req, res) => {
   }
 });
 
-// New endpoint to fetch ISS astronauts
 app.get('/api/iss-astronauts', async (req, res) => {
   try {
     const response = await axios.get('http://api.open-notify.org/astros.json');

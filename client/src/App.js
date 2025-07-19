@@ -22,7 +22,7 @@ function App() {
   const [userLocation, setUserLocation] = useState(null);
   const [message, setMessage] = useState("");
   const [alertsEnabled, setAlertsEnabled] = useState(false);
-  const [astronauts, setAstronauts] = useState([]); // New state for astronauts
+  const [astronauts, setAstronauts] = useState([]); // State for astronauts
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -144,34 +144,51 @@ function App() {
 
       <GlobeView issPosition={issPosition} path={path} />
 
-      {/* New div for Astronaut Details */}
+      {/* Astronaut Details Panel - Moved to bottom right and styled */}
       <div
         style={{
           position: "absolute",
-          bottom: 230, // Adjusted position to be above the alerts
-          left: 20,
-          width: "320px",
-          background: "rgba(0, 0, 0, 0.85)",
-          padding: "16px",
-          borderRadius: "12px",
-          color: "#fff",
-          backdropFilter: "blur(8px)",
+          bottom: 20,
+          right: 20, // Positioned on the right
+          padding: '20px 25px',
+          backdropFilter: 'blur(10px)',
+          background: 'rgba(255, 255, 255, 0.1)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          borderRadius: '16px',
+          color: '#fff',
+          fontFamily: 'Segoe UI, sans-serif',
+          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
           zIndex: 1000,
-          border: "1px solid rgba(255,255,255,0.2)",
+          maxWidth: '320px',
+          fontSize: '15px',
+          lineHeight: '1.6'
         }}
       >
-        <h4 style={{ margin: 0, fontSize: "16px" }}>🧑‍🚀 Astronauts on ISS</h4>
-        <p style={{ margin: "10px 0 5px 0", fontSize: "14px" }}>
-          Current number of astronauts: <strong>{astronauts.length}</strong>
-        </p>
-        <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-          {astronauts.map((astro, index) => (
-            <li key={index} style={{ marginBottom: "5px", fontSize: "14px" }}>
-              {astro.name} ({astro.craft})
-            </li>
-          ))}
-        </ul>
+        <h3 style={{
+          marginTop: 0,
+          marginBottom: 10,
+          fontSize: '18px',
+          color: '#00ffd1',
+          fontWeight: '600'
+        }}>
+          🧑‍🚀 Astronauts on ISS ({astronauts.length})
+        </h3>
+        {astronauts.length > 0 ? (
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {astronauts.map((astro, index) => (
+              <li key={index} style={{ marginBottom: "5px", fontSize: "14px" }}>
+                <strong>👤 Name:</strong> {astro.name} <br/>
+                <strong>🚀 Craft:</strong> {astro.craft} <br/>
+                {/* Placeholder for country/flag as direct data is not available from OpenNotify */}
+                <strong>🌍 Country:</strong> Unknown (Data not available via OpenNotify API)
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Loading astronaut data...</p>
+        )}
       </div>
+
 
       <div
         style={{
@@ -202,8 +219,8 @@ function App() {
             margin: "12px 0",
             fontSize: "14px",
             boxSizing: "border-box",
-            backgroundColor: "#fff", // Ensure input background is visible
-            color: "#000" // Ensure input text is visible
+            backgroundColor: "#fff",
+            color: "#000"
           }}
         />
         <button

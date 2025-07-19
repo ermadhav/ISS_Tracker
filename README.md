@@ -121,5 +121,5 @@ MIT License – use it freely, just credit the original author 🙌
 
 ### 👨‍💻 Author
 
-**Cosmo Coder**
+**Madhav Tiwari**
 GitHub: [@ermadhav](https://github.com/ermadhav)

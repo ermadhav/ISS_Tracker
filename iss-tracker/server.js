@@ -1,4 +1,4 @@
-// server.js (No changes needed, as the API for astronauts is already set up)
+// server.js
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');

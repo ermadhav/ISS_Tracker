@@ -1,4 +1,4 @@
-// src/components/GlobeView.js (No changes needed)
+// src/components/GlobeView.js
 import React, { useRef, useEffect } from 'react';
 import Globe from 'react-globe.gl';
 import issIcon from '../assets/icon3.png';

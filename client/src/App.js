@@ -144,7 +144,7 @@ function App() {
 
       <GlobeView issPosition={issPosition} path={path} />
 
-      {/* Astronaut Details Panel - Moved to bottom right and styled */}
+      {/* Astronaut Details Panel - Moved to bottom right, styled, with scroll */}
       <div
         style={{
           position: "absolute",
@@ -161,7 +161,9 @@ function App() {
           zIndex: 1000,
           maxWidth: '320px',
           fontSize: '15px',
-          lineHeight: '1.6'
+          lineHeight: '1.6',
+          maxHeight: '250px', // Decreased height
+          overflowY: 'auto' // Added scrollbar
         }}
       >
         <h3 style={{
@@ -176,7 +178,7 @@ function App() {
         {astronauts.length > 0 ? (
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
             {astronauts.map((astro, index) => (
-              <li key={index} style={{ marginBottom: "5px", fontSize: "14px" }}>
+              <li key={index} style={{ marginBottom: "10px", fontSize: "14px" }}>
                 <strong>👤 Name:</strong> {astro.name} <br/>
                 <strong>🚀 Craft:</strong> {astro.craft} <br/>
                 {/* Placeholder for country/flag as direct data is not available from OpenNotify */}

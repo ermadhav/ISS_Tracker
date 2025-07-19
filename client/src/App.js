@@ -1,9 +1,8 @@
-// App.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import GlobeView from "./components/GlobeView";
 import "./App.css";
-import logo from "./assets/logo2.png"; 
+import logo from "./assets/logo2.png";
 
 const OPENCAGE_API_KEY = "5d7b2591ded44996a37ac21c77b58f13";
 
@@ -22,6 +21,7 @@ function App() {
   const [userLocation, setUserLocation] = useState(null);
   const [message, setMessage] = useState("");
   const [alertsEnabled, setAlertsEnabled] = useState(false);
+  const [astronauts, setAstronauts] = useState([]); // ✅ New state
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -74,9 +74,24 @@ function App() {
     }
   };
 
+  const fetchAstronauts = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/api/astronauts");
+      setAstronauts(res.data.astronauts);
+    } catch (err) {
+      console.error("Failed to fetch astronauts data:", err);
+    }
+  };
+
   useEffect(() => {
     fetchISS();
-    const interval = setInterval(fetchISS, 10000);
+    fetchAstronauts();
+
+    const interval = setInterval(() => {
+      fetchISS();
+      fetchAstronauts();
+    }, 10000);
+
     return () => clearInterval(interval);
   }, [userLocation, email, alertsEnabled]);
 
@@ -90,68 +105,48 @@ function App() {
   };
 
   return (
-    <div
-      style={{
-        height: "100vh",
-        width: "100vw",
-        position: "relative",
-        overflow: "hidden",
-        fontFamily: "Segoe UI, sans-serif",
-      }}
-    >
-      <header
-        style={{
-          position: "absolute",
-          top: 20,
-          right: 20,
-          padding: "10px 10px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          width: "150px",
-          background: "rgba(255, 255, 255, 0.06)",
-          border: "1px solid rgba(255, 255, 255, 0.15)",
-          borderRadius: "16px",
-          backdropFilter: "blur(12px)",
-          boxShadow: "0 4px 16px rgba(255, 255, 255, 0.08)",
-          zIndex: 1000,
+    <div style={{ height: "100vh", width: "100vw", position: "relative", overflow: "hidden", fontFamily: "Segoe UI, sans-serif" }}>
+      <header style={{
+        position: "absolute",
+        top: 20,
+        right: 20,
+        padding: "10px 10px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        width: "150px",
+        background: "rgba(255, 255, 255, 0.06)",
+        border: "1px solid rgba(255, 255, 255, 0.15)",
+        borderRadius: "16px",
+        backdropFilter: "blur(12px)",
+        boxShadow: "0 4px 16px rgba(255, 255, 255, 0.08)",
+        zIndex: 1000,
+      }}>
+        <img src={logo} alt="Cosmo Logo" style={{
+          height: "150px", width: "150px", objectFit: "cover", borderRadius: "6px",
+          cursor: "pointer", transition: "transform 0.3s ease"
         }}
-      >
-        <img
-          src={logo}
-          alt="Cosmo Logo"
-          style={{
-            height: "150px",
-            width: "150px",
-            objectFit: "cover",
-            borderRadius: "6px",
-            cursor: "pointer",
-            transition: "transform 0.3s ease",
-          }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.transform = "scale(1.15)")
-          }
+          onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.15)")}
           onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
         />
       </header>
 
-      <GlobeView issPosition={issPosition} path={path} />
+      {/* ✅ Pass astronaut data */}
+      <GlobeView issPosition={issPosition} path={path} astronauts={astronauts} />
 
-      <div
-        style={{
-          position: "absolute",
-          bottom: 20,
-          left: 20,
-          width: "320px",
-          background: "rgba(0, 0, 0, 0.85)",
-          padding: "16px",
-          borderRadius: "12px",
-          color: "#fff",
-          backdropFilter: "blur(8px)",
-          zIndex: 1000,
-          border: "1px solid rgba(255,255,255,0.2)",
-        }}
-      >
+      <div style={{
+        position: "absolute",
+        bottom: 20,
+        left: 20,
+        width: "320px",
+        background: "rgba(0, 0, 0, 0.85)",
+        padding: "16px",
+        borderRadius: "12px",
+        color: "#fff",
+        backdropFilter: "blur(8px)",
+        zIndex: 1000,
+        border: "1px solid rgba(255,255,255,0.2)",
+      }}>
         <h4 style={{ margin: 0, fontSize: "16px" }}>🔔 Get ISS Alerts</h4>
         <input
           type="email"
@@ -185,35 +180,31 @@ function App() {
           ✅ Start Alerts
         </button>
         {message && (
-          <p
-            style={{
-              marginTop: "10px",
-              fontSize: "14px",
-              color: message.includes("not") ? "orange" : "lightgreen",
-            }}
-          >
+          <p style={{
+            marginTop: "10px",
+            fontSize: "14px",
+            color: message.includes("not") ? "orange" : "lightgreen",
+          }}>
             {message}
           </p>
         )}
       </div>
 
-      <footer
-        style={{
-          position: "absolute",
-          bottom: 20,
-          left: "50%",
-          transform: "translateX(-50%)",
-          color: "#fff",
-          fontSize: "1rem",
-          backgroundColor: "rgba(0,0,0,0.4)",
-          padding: "6px 12px",
-          borderRadius: "8px",
-          backdropFilter: "blur(4px)",
-          border: "1px solid rgba(255,255,255,0.15)",
-          zIndex: 1000,
-          fontWeight: "500",
-        }}
-      >
+      <footer style={{
+        position: "absolute",
+        bottom: 20,
+        left: "50%",
+        transform: "translateX(-50%)",
+        color: "#fff",
+        fontSize: "1rem",
+        backgroundColor: "rgba(0,0,0,0.4)",
+        padding: "6px 12px",
+        borderRadius: "8px",
+        backdropFilter: "blur(4px)",
+        border: "1px solid rgba(255,255,255,0.15)",
+        zIndex: 1000,
+        fontWeight: "500",
+      }}>
         This website is made with ❤️ by Cosmo Coder
       </footer>
     </div>

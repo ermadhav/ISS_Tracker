@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
@@ -17,7 +16,18 @@ app.get('/api/iss-location', async (req, res) => {
   }
 });
 
-// Haversine distance formula
+// ✅ New route: Get astronauts aboard ISS
+app.get('/api/astronauts', async (req, res) => {
+  try {
+    const response = await axios.get('http://api.open-notify.org/astros.json');
+    const peopleInISS = response.data.people.filter(p => p.craft === 'ISS');
+    res.json({ astronauts: peopleInISS });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch astronauts data' });
+  }
+});
+
 function getDistanceKm(lat1, lon1, lat2, lon2) {
   const R = 6371;
   const toRad = deg => deg * Math.PI / 180;
@@ -36,8 +46,8 @@ function getDistanceKm(lat1, lon1, lat2, lon2) {
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'madhavtiwari2024@gmail.com',          
-    pass: 'litp xhcv cpdy yomo',            
+    user: 'madhavtiwari2024@gmail.com',
+    pass: 'litp xhcv cpdy yomo',
   }
 });
 

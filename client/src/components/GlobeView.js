@@ -1,10 +1,9 @@
-// src/components/GlobeView.js
 import React, { useRef, useEffect } from 'react';
 import Globe from 'react-globe.gl';
 import issIcon from '../assets/icon3.png';
 import * as THREE from 'three';
 
-function GlobeView({ issPosition, path }) {
+function GlobeView({ issPosition, path, astronauts }) {
   const globeRef = useRef();
 
   useEffect(() => {
@@ -50,6 +49,18 @@ function GlobeView({ issPosition, path }) {
         <p><strong>🧭 Longitude:</strong> {issPosition.longitude.toFixed(4)}</p>
         <p><strong>🚀 Velocity:</strong> {issPosition.velocity.toFixed(2)} km/h</p>
         <p><strong>🛰️ Altitude:</strong> {issPosition.altitude.toFixed(2)} km</p>
+
+        {/* ✅ Display astronauts */}
+        {astronauts?.length > 0 && (
+          <>
+            <p><strong>👨‍🚀 Astronauts on ISS:</strong></p>
+            <ul style={{ paddingLeft: 18, marginTop: 4 }}>
+              {astronauts.map((astro, index) => (
+                <li key={index}>{astro.name}</li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
 
       <div style={{
@@ -90,7 +101,7 @@ function GlobeView({ issPosition, path }) {
 
           const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
           const sprite = new THREE.Sprite(spriteMaterial);
-          sprite.scale.set(7, 7, 7); 
+          sprite.scale.set(7, 7, 7);
           return sprite;
         }}
         customThreeObjectUpdate={(obj, d) => {

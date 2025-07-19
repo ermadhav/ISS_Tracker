@@ -2,7 +2,7 @@
 
 **Track the real-time location of the International Space Station (ISS)** on a 3D globe, and receive **email alerts** when it's passing near your location!
 
-![ISS Tracker Preview](client/src/assets/image1.png) 
+![ISS Tracker Preview](client/src/assets/image2.png) 
 
 ---
 
@@ -98,7 +98,7 @@ npm start
 ## 📷 Screenshots
 
 ### ISS Tracker Interface
-![ISS Tracker Demo](client/src/assets/image1.png)
+![ISS Tracker Demo](client/src/assets/image2.png)
 ![ISS Tracker Demo](client/src/assets/screenshot.png)
 
 

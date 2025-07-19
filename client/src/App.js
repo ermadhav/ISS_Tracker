@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import GlobeView from "./components/GlobeView";
-import SkyMapView from "./components/SkyMapView";
+import SkyMapView from "./components/SkyMap";
 import LiveFeed from "./components/LiveFeed";
 import "./App.css";
 import logo from "./assets/logo2.png";

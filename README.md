@@ -104,7 +104,11 @@ npm start
 
 ### Email Alert
 
-![ISS Tracker Demo](client/src/assets/screenshot.png)
+![Email Alert](client/src/assets/screenshot.png)
+
+### YT Live Feed
+
+![YT Live Feed](client/src/assets/screenshot.png)
 
 ---
 

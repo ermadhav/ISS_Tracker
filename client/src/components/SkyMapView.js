@@ -1,31 +1,35 @@
+// src/components/SkyMapView.jsx
 import React, { useEffect, useRef } from "react";
 
-function SkyMapView() {
+function SkyMapView({ userLocation }) {
   const skyRef = useRef(null);
 
   useEffect(() => {
     if (!window.VirtualSky) {
-      console.error("VirtualSky is not loaded");
+      console.error("VirtualSky not loaded");
       return;
     }
+    if (!skyRef.current) return;
 
+    const { latitude = 22.7633, longitude = 75.8797 } = userLocation || {};
+
+    // Initialize VirtualSky with your location or default
     const sky = new window.VirtualSky(skyRef.current, {
       projection: "stereo",
       showstarlabels: true,
       showplanetlabels: true,
       showdate: false,
       showposition: false,
-      latitude: 22.763276959059286,  // example latitude
-      longitude: 75.8796544034434,   // example longitude
-      // other options as needed
+      latitude,
+      longitude,
     });
 
-    sky.goToRaDec(0, 0);
+    // Optional: sky.goToRaDec(ra, dec) if needed
 
     return () => {
-      // Cleanup if VirtualSky exposes anything — usually no explicit destroy
+      // No cleanup method provided by VirtualSky
     };
-  }, []);
+  }, [userLocation]);
 
   return (
     <div>
@@ -33,7 +37,7 @@ function SkyMapView() {
       <div
         ref={skyRef}
         style={{ width: "600px", height: "600px", backgroundColor: "black" }}
-      ></div>
+      />
     </div>
   );
 }

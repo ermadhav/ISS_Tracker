@@ -4,7 +4,7 @@
 
 
 
-![ISS Tracker Preview](client/src/assets/image2.png) 
+![ISS Tracker Preview](client/src/assets/image.png) 
 
 ---
 

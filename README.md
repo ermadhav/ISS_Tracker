@@ -2,32 +2,30 @@
 
 **Track the real-time location of the International Space Station (ISS)** on a 3D globe, view the **astronauts currently aboard**, and receive **Email Alerts** when it's passing near your location!
 
-
-
-![ISS Tracker Preview](client/src/assets/image.png) 
+![ISS Tracker Preview](client/src/assets/image.png)
 
 ---
 
 ### 🚀 Features
 
-* 🌐 Real-time tracking of the ISS on a 3D globe using `react-globe.gl`
-* 🛰️ Animated ISS icon with smooth camera follow
-* 📍 Displays country, state, coordinates, altitude, and velocity
-* 🧑‍🚀 Shows the **current astronauts aboard the ISS**, including their names and roles
-* ✉️ Sends **email alerts** when ISS is flying over your location
-* 🌎 Uses **OpenCage Geocoding API** and **Gmail SMTP** for alerts
+- 🌐 Real-time tracking of the ISS on a 3D globe using `react-globe.gl`
+- 🛰️ Animated ISS icon with smooth camera follow
+- 📍 Displays country, state, coordinates, altitude, and velocity
+- 🧑‍🚀 Shows the **current astronauts aboard the ISS**, including their names and roles
+- ✉️ Sends **email alerts** when ISS is flying over your location
+- 🌎 Uses **OpenCage Geocoding API** and **Gmail SMTP** for alerts
 
 ---
 
 ### 📦 Technologies Used
 
-* **Frontend**: React, react-globe.gl, Three.js, Axios
-* **Backend**: Node.js, Express, Axios, Nodemailer
-* **APIs**:
+- **Frontend**: React, react-globe.gl, Three.js, Axios
+- **Backend**: Node.js, Express, Axios, Nodemailer
+- **APIs**:
 
-  * [Open Notify ISS Location API](http://open-notify.org/Open-Notify-API/ISS-Location-Now/)
-  * [OpenCage Geocoder](https://opencagedata.com/)
-  * [Gmail SMTP](https://support.google.com/accounts/answer/185833?hl=en)
+  - [Open Notify ISS Location API](http://open-notify.org/Open-Notify-API/ISS-Location-Now/)
+  - [OpenCage Geocoder](https://opencagedata.com/)
+  - [Gmail SMTP](https://support.google.com/accounts/answer/185833?hl=en)
 
 ---
 
@@ -53,11 +51,11 @@ npm install
 
 #### 🔹 3. Set Up OpenCage API Key
 
-* Get a free key from: [https://opencagedata.com/api](https://opencagedata.com/api)
-* Add it in `App.js`:
+- Get a free key from: [https://opencagedata.com/api](https://opencagedata.com/api)
+- Add it in `App.js`:
 
 ```js
-const OPENCAGE_API_KEY = 'your-key-here';
+const OPENCAGE_API_KEY = "your-key-here";
 ```
 
 #### 🔹 4. Configure Gmail for Email Alerts
@@ -69,11 +67,11 @@ const OPENCAGE_API_KEY = 'your-key-here';
 
 ```js
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: "gmail",
   auth: {
-    user: 'yourgmail@gmail.com',
-    pass: 'your_app_password'
-  }
+    user: "yourgmail@gmail.com",
+    pass: "your_app_password",
+  },
 });
 ```
 
@@ -101,18 +99,21 @@ npm start
 ## 📷 Screenshots
 
 ### ISS Tracker Interface
-![ISS Tracker Demo](client/src/assets/image.png)
-![ISS Tracker Demo](client/src/assets/screenshot.png)
 
+![ISS Tracker Demo](client/src/assets/image.png)
+
+### Email Alert
+
+![ISS Tracker Demo](client/src/assets/screenshot.png)
 
 ---
 
 ### ✅ To-Do / Future Features
 
-* [ ] Add "Stop Alerts" button
-* [ ] Store email and alert settings in `localStorage`
-* [ ] Push/browser notifications
-* [ ] Night/day globe theme toggle
+- [ ] Add "Stop Alerts" button
+- [ ] Store email and alert settings in `localStorage`
+- [ ] Push/browser notifications
+- [ ] Night/day globe theme toggle
 
 ---
 

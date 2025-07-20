@@ -1,38 +1,39 @@
-// SkyMapView.js
-import React from "react";
-import { Helmet } from "react-helmet";
+import React, { useEffect, useRef } from "react";
 
-function SkyMapView({ userLocation }) {
-  if (!userLocation) {
-    return <div style={{ color: "#fff" }}>📍 Waiting for user location...</div>;
-  }
+function SkyMapView() {
+  const skyRef = useRef(null);
 
-  const { latitude, longitude } = userLocation;
+  useEffect(() => {
+    if (!window.VirtualSky) {
+      console.error("VirtualSky is not loaded");
+      return;
+    }
+
+    const sky = new window.VirtualSky(skyRef.current, {
+      projection: "stereo",
+      showstarlabels: true,
+      showplanetlabels: true,
+      showdate: false,
+      showposition: false,
+      latitude: 22.763276959059286,  // example latitude
+      longitude: 75.8796544034434,   // example longitude
+      // other options as needed
+    });
+
+    sky.goToRaDec(0, 0);
+
+    return () => {
+      // Cleanup if VirtualSky exposes anything — usually no explicit destroy
+    };
+  }, []);
 
   return (
-    <div style={{ height: "100%", width: "100%" }}>
-      <Helmet>
-        <script src="https://virtualsky.lco.global/virtualsky.min.js"></script>
-      </Helmet>
-      <div id="skymap" style={{ height: "100vh", width: "100vw" }}></div>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.addEventListener("load", function() {
-              new VirtualSky({
-                id: "skymap",
-                latitude: ${latitude},
-                longitude: ${longitude},
-                projection: "stereo",
-                constellations: true,
-                showposition: true,
-                showdate: true,
-                gridlines_az: true
-              });
-            });
-          `,
-        }}
-      />
+    <div>
+      <h2>🌌 Sky Map for your location:</h2>
+      <div
+        ref={skyRef}
+        style={{ width: "600px", height: "600px", backgroundColor: "black" }}
+      ></div>
     </div>
   );
 }

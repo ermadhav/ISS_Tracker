@@ -112,15 +112,6 @@ npm start
 
 ---
 
-### ✅ To-Do / Future Features
-
-- [ ] Add "Stop Alerts" button
-- [ ] Store email and alert settings in `localStorage`
-- [ ] Push/browser notifications
-- [ ] Night/day globe theme toggle
-
----
-
 ### 📄 License
 
 MIT License – use it freely, just credit the original author 🙌

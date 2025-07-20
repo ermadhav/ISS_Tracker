@@ -13,6 +13,7 @@
 - 📍 Displays country, state, coordinates, altitude, and velocity
 - 🧑‍🚀 Shows the **current astronauts aboard the ISS**, including their names and roles
 - ✉️ Sends **email alerts** when ISS is flying over your location
+🎥 Embeds NASA’s live video stream from the ISS window directly in the app
 - 🌎 Uses **OpenCage Geocoding API** and **Gmail SMTP** for alerts
 
 ---

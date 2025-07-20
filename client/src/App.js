@@ -27,29 +27,40 @@ function App() {
   const [astronauts, setAstronauts] = useState([]);
   const [view, setView] = useState("globe");
 
+  // Get user location on load
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const { latitude, longitude } = pos.coords;
         setUserLocation({ latitude, longitude });
       },
-      (err) => console.error("Geolocation error:", err)
+      (err) => {
+        console.error("Geolocation error:", err);
+        setMessage("❗ Location access denied or unavailable.");
+      }
     );
   }, []);
 
+  // Fetch ISS data
   const fetchISS = async () => {
     try {
       const issRes = await axios.get("http://localhost:5000/api/iss-location");
       const latitude = parseFloat(issRes.data.iss_position.latitude);
       const longitude = parseFloat(issRes.data.iss_position.longitude);
 
-      const geoRes = await axios.get(
-        `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${OPENCAGE_API_KEY}`
-      );
+      let country = "International Waters";
+      let state = "";
 
-      const components = geoRes.data.results[0]?.components || {};
-      const country = components.country || "International Waters";
-      const state = components.state || components.region || "";
+      try {
+        const geoRes = await axios.get(
+          `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${OPENCAGE_API_KEY}`
+        );
+        const components = geoRes.data.results[0]?.components || {};
+        country = components.country || "International Waters";
+        state = components.state || components.region || "";
+      } catch (geoError) {
+        console.warn("Failed to fetch OpenCage location data.");
+      }
 
       setIssPosition({
         latitude,
@@ -62,25 +73,21 @@ function App() {
 
       setPath((prev) => [...prev.slice(-19), [longitude, latitude]]);
 
-      const astrosRes = await axios.get(
-        "http://localhost:5000/api/iss-astronauts"
-      );
-      if (astrosRes.data && astrosRes.data.people) {
+      const astrosRes = await axios.get("http://localhost:5000/api/iss-astronauts");
+      if (astrosRes.data?.people) {
         const issAstronauts = astrosRes.data.people.filter(
           (astro) => astro.craft === "ISS"
         );
         setAstronauts(issAstronauts);
       }
 
+      // Check if ISS is nearby and alerts are on
       if (alertsEnabled && userLocation && email) {
-        const result = await axios.post(
-          "http://localhost:5000/api/check-visibility",
-          {
-            userLat: userLocation.latitude,
-            userLng: userLocation.longitude,
-            email,
-          }
-        );
+        const result = await axios.post("http://localhost:5000/api/check-visibility", {
+          userLat: userLocation.latitude,
+          userLng: userLocation.longitude,
+          email,
+        });
         setMessage(result.data.message);
       }
     } catch (error) {
@@ -113,16 +120,13 @@ function App() {
         fontFamily: "Segoe UI, sans-serif",
       }}
     >
+      {/* Logo Header */}
       <header
         style={{
           position: "absolute",
           top: 20,
           right: 20,
-          padding: "10px 10px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          width: "150px",
+          padding: "10px",
           background: "rgba(255, 255, 255, 0.06)",
           border: "1px solid rgba(255, 255, 255, 0.15)",
           borderRadius: "16px",
@@ -142,13 +146,12 @@ function App() {
             cursor: "pointer",
             transition: "transform 0.3s ease",
           }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.transform = "scale(1.15)")
-          }
+          onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.15)")}
           onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
         />
       </header>
 
+      {/* Navigation Buttons */}
       <div
         style={{
           position: "absolute",
@@ -206,10 +209,12 @@ function App() {
         </button>
       </div>
 
+      {/* Views */}
       {view === "globe" && <GlobeView issPosition={issPosition} path={path} />}
       {view === "sky" && <SkyMapView userLocation={userLocation} />}
       {view === "feed" && <LiveFeed />}
 
+      {/* Astronauts Info */}
       {view === "globe" && (
         <div
           style={{
@@ -246,11 +251,8 @@ function App() {
           {astronauts.length > 0 ? (
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               {astronauts.map((astro, index) => (
-                <li
-                  key={index}
-                  style={{ marginBottom: "10px", fontSize: "14px" }}
-                >
-                  <strong>👤 Name:</strong> {astro.name} <br />
+                <li key={index} style={{ marginBottom: "10px", fontSize: "14px" }}>
+                  <strong>👤 Name:</strong> {astro.name}
                 </li>
               ))}
             </ul>
@@ -260,6 +262,7 @@ function App() {
         </div>
       )}
 
+      {/* Alert Input Box */}
       {view === "globe" && (
         <div
           style={{
@@ -324,6 +327,7 @@ function App() {
         </div>
       )}
 
+      {/* Footer */}
       <footer
         style={{
           position: "absolute",

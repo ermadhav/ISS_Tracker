@@ -1,4 +1,3 @@
-// src/components/SkyMapView.js
 import React, { useEffect, useRef, useState } from "react";
 
 function SkyMapView({ userLocation }) {
@@ -6,21 +5,40 @@ function SkyMapView({ userLocation }) {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (!userLocation) {
-      setError("Waiting for location...");
-      return;
-    }
+    const loadScript = () => {
+      return new Promise((resolve, reject) => {
+        if (window.virtualsky) {
+          resolve();
+          return;
+        }
 
-    const loadSkyMap = (lat, lng) => {
-      if (!window.virtualsky) {
-        setError("virtualsky script not loaded.");
+        const script = document.createElement("script");
+        script.src = "https://virtualsky.lco.global/virtualsky.min.js";
+        script.async = true;
+        script.onload = resolve;
+        script.onerror = () => reject("Failed to load virtualsky.js");
+
+        document.body.appendChild(script);
+      });
+    };
+
+    const renderSkyMap = () => {
+      if (!userLocation) {
+        setError("Waiting for location...");
         return;
       }
 
+      if (!skyRef.current) {
+        setError("Sky container not found.");
+        return;
+      }
+
+      skyRef.current.innerHTML = ""; // clear old sky if re-rendering
+
       window.virtualsky({
         id: "sky",
-        latitude: lat,
-        longitude: lng,
+        latitude: userLocation.latitude,
+        longitude: userLocation.longitude,
         projection: "stereo",
         constellations: true,
         constellationlabels: true,
@@ -34,7 +52,9 @@ function SkyMapView({ userLocation }) {
       });
     };
 
-    loadSkyMap(userLocation.latitude, userLocation.longitude);
+    loadScript()
+      .then(renderSkyMap)
+      .catch((err) => setError(err));
   }, [userLocation]);
 
   return (

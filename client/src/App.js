@@ -196,7 +196,8 @@ function App() {
         >
           🌐 Globe
         </button>
-        {/* <button
+
+        <button
           onClick={() => setView("sky")}
           style={{
             background: view === "sky" ? "#00ffd1" : "transparent",
@@ -208,7 +209,8 @@ function App() {
           }}
         >
           🌌 Sky Map
-        </button> */}
+        </button>
+
         <button
           onClick={() => setView("feed")}
           style={{

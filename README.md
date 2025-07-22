@@ -122,7 +122,7 @@ npm start
 
 ### 📄 License
 
-MIT License – use it freely, just credit the original author 🙌
+MIT License – use it freely, just credit the me 🙌
 
 ---
 

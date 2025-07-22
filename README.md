@@ -10,14 +10,13 @@
 
 ### 🚀 Features
 
-- 🌐 Real-time tracking of the ISS on a 3D globe using `react-globe.gl`
-- 🛰️ Animated ISS icon with smooth camera follow
-- 📍 Displays country, state, coordinates, altitude, and velocity
+- 🌐 **Real-time tracking** of the ISS on a 3D globe using `react-globe.gl`
+- 📍 Displays **country, state, coordinates, altitude, and velocity**
 - 🧑‍🚀 Shows the **current astronauts aboard the ISS**, including their names and roles
 - ✉️ Sends **email alerts** when ISS is flying over your location
 - 🎥 Embeds NASA’s live video stream from the ISS window directly in the app
 - 🌎 Uses **OpenCage Geocoding API** and **Gmail SMTP** for alerts
-- 🔭 Integrated Stellarium Live SkyView for a real-time interactive stargazing experience alongside the ISS tracking
+- 🔭 **Integrated Stellarium Live SkyView** for a real-time interactive stargazing experience alongside the ISS tracking
 - 🌎 Built for an immersive space experience combining data, visuals, and alerts
 ---
 

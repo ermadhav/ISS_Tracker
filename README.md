@@ -1,9 +1,6 @@
 ## 🛰️ ISS Live Tracker 🌍
 
 **Track the real-time location of the International Space Station (ISS)** on a 3D globe, view the **astronauts currently aboard**, and receive **Email Alerts** when it's passing near your location!
-<br><br>
-<br>
-<br>
 <br>
 <br>
 

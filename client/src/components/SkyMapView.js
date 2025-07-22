@@ -13,26 +13,19 @@ const SkyMapView = () => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setCoords({
-          lat: position.coords.latitude.toFixed(6),
-          lon: position.coords.longitude.toFixed(6),
+          lat: position.coords.latitude.toFixed(4),
+          lon: position.coords.longitude.toFixed(4),
         });
       },
-      (err) => {
-        setError("Failed to retrieve your location.");
-      }
+      () => setError("Failed to retrieve your location.")
     );
   }, []);
 
-  if (error) {
-    return <div>{error}</div>;
-  }
-
-  if (!coords) {
-    return <div>Fetching your location...</div>;
-  }
+  if (error) return <div>{error}</div>;
+  if (!coords) return <div>Fetching your location...</div>;
 
   const { lat, lon } = coords;
-  const srcUrl = `https://stellarium-web.org/?lat=${lat}&lon=${lon}`;
+  const srcUrl = `https://in-the-sky.org/skymap.php?lat=${lat}&lon=${lon}&zoom=3`;
 
   return (
     <iframe

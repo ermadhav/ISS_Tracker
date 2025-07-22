@@ -15,9 +15,10 @@
 - 📍 Displays country, state, coordinates, altitude, and velocity
 - 🧑‍🚀 Shows the **current astronauts aboard the ISS**, including their names and roles
 - ✉️ Sends **email alerts** when ISS is flying over your location
-  🎥 Embeds NASA’s live video stream from the ISS window directly in the app
+- 🎥 Embeds NASA’s live video stream from the ISS window directly in the app
 - 🌎 Uses **OpenCage Geocoding API** and **Gmail SMTP** for alerts
-
+- 🔭 Integrated Stellarium Live SkyView for a real-time interactive stargazing experience alongside the ISS tracking
+🌎 Built for an immersive space experience combining data, visuals, and alerts
 ---
 
 ### 📦 Technologies Used

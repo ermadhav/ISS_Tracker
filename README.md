@@ -103,10 +103,6 @@ npm start
 
 ![ISS Tracker Demo](client/src/assets/image.png)
 
-### Email Alert
-
-![Email Alert](client/src/assets/screenshot.png)
-
 ### Sky View 
 
 ![YT Live Feed](client/src/assets/skyview.png)
@@ -114,6 +110,10 @@ npm start
 ### YT Live Feed
 
 ![YT Live Feed](client/src/assets/live.png)
+
+### Email Alert
+
+![Email Alert](client/src/assets/screenshot.png)
 
 ---
 

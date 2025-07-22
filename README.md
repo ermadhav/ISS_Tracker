@@ -29,7 +29,7 @@
   - [Open Notify ISS Location API](http://open-notify.org/Open-Notify-API/ISS-Location-Now/)
   - [OpenCage Geocoder](https://opencagedata.com/)
   - [Gmail SMTP](https://support.google.com/accounts/answer/185833?hl=en)
-  - [Gmail SMTP]()
+  - [Gmail SMTP](https://stellarium-web.org/)
 
 ---
 

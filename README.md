@@ -1,6 +1,10 @@
 ## 🛰️ ISS Live Tracker 🌍
 
 **Track the real-time location of the International Space Station (ISS)** on a 3D globe, view the **astronauts currently aboard**, and receive **Email Alerts** when it's passing near your location!
+<br><br>
+<br>
+<br>
+<br>
 <br>
 
 ![ISS Tracker Preview](client/src/assets/image.png)
@@ -14,7 +18,7 @@
 - 📍 Displays country, state, coordinates, altitude, and velocity
 - 🧑‍🚀 Shows the **current astronauts aboard the ISS**, including their names and roles
 - ✉️ Sends **email alerts** when ISS is flying over your location
-🎥 Embeds NASA’s live video stream from the ISS window directly in the app
+  🎥 Embeds NASA’s live video stream from the ISS window directly in the app
 - 🌎 Uses **OpenCage Geocoding API** and **Gmail SMTP** for alerts
 
 ---
@@ -104,7 +108,7 @@ npm start
 
 ![ISS Tracker Demo](client/src/assets/image.png)
 
-### 🌃Sky View 
+### 🌃Sky View
 
 ![YT Live Feed](client/src/assets/skyview.png)
 

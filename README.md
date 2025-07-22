@@ -111,7 +111,7 @@ npm start
 
 ![YT Live Feed](client/src/assets/live.png)
 
-### Email Alert
+### 📧Email Alert
 
 ![Email Alert](client/src/assets/screenshot.png)
 

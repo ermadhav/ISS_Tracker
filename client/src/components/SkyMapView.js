@@ -1,88 +1,57 @@
 // src/components/SkyMapView.js
-import React, { useEffect, useRef, useState } from "react";
-import * as d3 from "d3";
-
-// Inline CSS from celestial.css (simplified for core styles)
-const celestialStyles = `
-  #celestial-map {
-    width: 100%;
-    height: 100vh;
-    background-color: black;
-    color: white;
-    font-family: sans-serif;
-  }
-  .celestial-container svg {
-    width: 100% !important;
-    height: 100% !important;
-    display: block;
-  }
-`;
+import React, { useEffect, useState } from "react";
 
 const SkyMapView = () => {
-  const containerRef = useRef(null);
-  const [location, setLocation] = useState(null);
+  const [coords, setCoords] = useState(null);
   const [error, setError] = useState(null);
 
-  // Inject inline CSS into document
-  useEffect(() => {
-    const styleTag = document.createElement("style");
-    styleTag.innerHTML = celestialStyles;
-    document.head.appendChild(styleTag);
-    return () => document.head.removeChild(styleTag);
-  }, []);
-
-  // Load user location
+  // Get user's current geolocation
   useEffect(() => {
     if (!navigator.geolocation) {
-      setError("Geolocation is not supported.");
+      setError("Geolocation is not supported by your browser.");
       return;
     }
+
     navigator.geolocation.getCurrentPosition(
-      (pos) =>
-        setLocation({
-          lat: pos.coords.latitude,
-          lon: pos.coords.longitude,
-        }),
-      () => setError("Location access denied.")
+      (position) => {
+        setCoords({
+          lat: position.coords.latitude.toFixed(6),
+          lon: position.coords.longitude.toFixed(6),
+        });
+      },
+      () => {
+        setError("Unable to retrieve your location. Please allow location access.");
+      }
     );
   }, []);
 
-  // Dynamically load and render d3-celestial
-  useEffect(() => {
-    if (!location || !containerRef.current) return;
+  // Error display
+  if (error) {
+    return <div style={{ color: "red", padding: "1rem" }}>{error}</div>;
+  }
 
-    // Load celestial.js dynamically from CDN
-    const script = document.createElement("script");
-    script.src = "https://ofrohn.github.io/files/celestial/celestial.min.js";
-    script.onload = () => {
-      if (!window.Celestial) return setError("Celestial failed to load.");
-      window.Celestial.display({
-        width: containerRef.current.offsetWidth,
-        projection: "airy",
-        datapath: "https://ofrohn.github.io/files/celestial/data/",
-        location: true,
-        form: false,
-        zoomlevel: 3,
-        interactive: true,
-        center: [location.lon, location.lat],
-      });
-    };
-    document.body.appendChild(script);
+  // Loading state while fetching location
+  if (!coords) {
+    return <div style={{ padding: "1rem" }}>Fetching your location...</div>;
+  }
 
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, [location]);
+  // Construct Stellarium URL with lat/lon
+  const { lat, lon } = coords;
+  const stellariumUrl = `https://stellarium-web.org/?lat=${lat}&lon=${lon}`;
 
-  if (error) return <div style={{ padding: "1rem", color: "red" }}>{error}</div>;
-  if (!location) return <div style={{ padding: "1rem" }}>Getting your location...</div>;
-
+  // Render the iframe
   return (
-    <div
-      id="celestial-map"
-      className="celestial-container"
-      ref={containerRef}
-    ></div>
+    <div style={{ width: "100%", height: "100vh" }}>
+      <iframe
+        title="Sky Map"
+        src={stellariumUrl}
+        width="100%"
+        height="100%"
+        frameBorder="0"
+        allowFullScreen
+        style={{ border: "none" }}
+      />
+    </div>
   );
 };
 

@@ -88,16 +88,6 @@ node server.js
 # Start frontend (in another terminal)
 npm start
 ```
-
----
-
-### ✨ How It Works
-
-1. App tracks ISS using Open Notify API every 10 seconds.
-2. Uses your browser’s GPS to get your current location.
-3. If the ISS is within 1000 km and alerts are enabled, you'll get an email alert.
-4. ISS icon updates in real-time on a 3D globe with camera auto-follow.
-
 ---
 
 ## 📷 Screenshots

@@ -18,7 +18,7 @@
 - 🎥 Embeds NASA’s live video stream from the ISS window directly in the app
 - 🌎 Uses **OpenCage Geocoding API** and **Gmail SMTP** for alerts
 - 🔭 Integrated Stellarium Live SkyView for a real-time interactive stargazing experience alongside the ISS tracking
-🌎 Built for an immersive space experience combining data, visuals, and alerts
+- 🌎 Built for an immersive space experience combining data, visuals, and alerts
 ---
 
 ### 📦 Technologies Used

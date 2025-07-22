@@ -345,7 +345,7 @@ function App() {
       <footer
         style={{
           position: "absolute",
-          bottom: 20,
+          bottom: 50,
           left: "50%",
           transform: "translateX(-50%)",
           color: "#fff",

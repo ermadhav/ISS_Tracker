@@ -113,7 +113,6 @@ npm start
 ### 📄 License
 
 MIT License – use it freely, just credit the me 🙌
-
 ---
 
 ### 👨‍💻 Author
